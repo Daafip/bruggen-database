@@ -94,7 +94,7 @@ def to_canonical(
     for (_, row), cx, cy in zip(gdf.iterrows(), centroids.x, centroids.y):
         tags = row.get("tags") if isinstance(row.get("tags"), dict) else {}
         osm_id = _osm_id(row)
-        otype = (row.get("type") or "node")
+        otype = row.get("type") or "node"
         name = _tag(tags, "name") or row.get(official_name_col) or None
         rec = {
             "id": osm_id,

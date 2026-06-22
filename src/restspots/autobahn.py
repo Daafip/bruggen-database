@@ -42,7 +42,9 @@ def rest_areas(road: str, cache_dir: str | pathlib.Path = "data/raw") -> list[di
     cache = cache_dir / f"autobahn_{road.replace('/', '_')}_parking_lorry.json"
     if cache.exists():
         return json.loads(cache.read_text()).get("parking_lorry", [])
-    r = requests.get(f"{BASE}/{road}/services/parking_lorry", headers=HEADERS, timeout=30)
+    r = requests.get(
+        f"{BASE}/{road}/services/parking_lorry", headers=HEADERS, timeout=30
+    )
     if not r.ok:
         return []
     cache_dir.mkdir(parents=True, exist_ok=True)

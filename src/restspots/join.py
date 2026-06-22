@@ -54,7 +54,9 @@ def attach_playgrounds(
     rest_m = rest_m.reset_index(drop=True)
 
     is_poly = rest_m.geometry.geom_type.isin(["Polygon", "MultiPolygon"])
-    buf_dist = [contained_buf if p else proximity_buf for p in is_poly]  # per-row distance
+    buf_dist = [
+        contained_buf if p else proximity_buf for p in is_poly
+    ]  # per-row distance
     zone_geom = rest_m.geometry.buffer(buf_dist)
     zones = gpd.GeoDataFrame({"_rid": rest_m.index}, geometry=zone_geom, crs=PROJ)
 

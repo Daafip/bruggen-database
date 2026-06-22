@@ -51,7 +51,9 @@ def _gather_enrichment(cfg: CountryConfig, raw_dir: pathlib.Path):
     frames = []
     for key in cfg.enrichment:
         if key not in CONNECTORS:
-            print(f"  ! unknown enrichment connector {key!r}, skipping", file=sys.stderr)
+            print(
+                f"  ! unknown enrichment connector {key!r}, skipping", file=sys.stderr
+            )
             continue
         fetch_fn, to_points = CONNECTORS[key]
         pts = to_points(fetch_fn(str(raw_dir)))
@@ -102,7 +104,9 @@ def cmd_build(args) -> int:
 
     points = _gather_enrichment(cfg, p["raw"]) if cfg.enrichment else None
     if points is not None and len(stops):
-        stops = join.attach_nearest(stops, points, ["official_name", "official_ref"], 300.0)
+        stops = join.attach_nearest(
+            stops, points, ["official_name", "official_ref"], 300.0
+        )
         stops["motorway_ref"] = stops["official_ref"]
 
     retrieved_at = _snapshot_date(raw_file)
@@ -195,7 +199,9 @@ COMMANDS = {
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="restspots", description=__doc__)
     parser.add_argument("command", choices=list(COMMANDS), help="pipeline stage to run")
-    parser.add_argument("--country", default="DE", help="ISO country code (default: DE)")
+    parser.add_argument(
+        "--country", default="DE", help="ISO country code (default: DE)"
+    )
     parser.add_argument("--config", default=None, help="path to countries.yml")
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--interim-dir", default="data/interim")

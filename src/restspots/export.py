@@ -33,7 +33,9 @@ def write_geojson(gdf: gpd.GeoDataFrame, path: str | pathlib.Path) -> pathlib.Pa
     return path
 
 
-def write_csv_wkt(df: pd.DataFrame | gpd.GeoDataFrame, path: str | pathlib.Path) -> pathlib.Path:
+def write_csv_wkt(
+    df: pd.DataFrame | gpd.GeoDataFrame, path: str | pathlib.Path
+) -> pathlib.Path:
     """Write CSV with a ``WKT`` column (+ ``latitude``/``longitude``) for My Maps / sheets."""
     path = pathlib.Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -45,7 +47,9 @@ def write_csv_wkt(df: pd.DataFrame | gpd.GeoDataFrame, path: str | pathlib.Path)
         out = pd.DataFrame(out.drop(columns="geometry"))
     else:
         # Plain canonical DataFrame: build a POINT WKT from lat/lon.
-        out["WKT"] = [f"POINT ({lon} {lat})" for lon, lat in zip(out["lon"], out["lat"])]
+        out["WKT"] = [
+            f"POINT ({lon} {lat})" for lon, lat in zip(out["lon"], out["lat"])
+        ]
         out["latitude"] = out["lat"]
         out["longitude"] = out["lon"]
     if len(out) > MYMAPS_ROW_LIMIT:
@@ -58,7 +62,9 @@ def write_csv_wkt(df: pd.DataFrame | gpd.GeoDataFrame, path: str | pathlib.Path)
     return path
 
 
-def write_kml(df: pd.DataFrame | gpd.GeoDataFrame, path: str | pathlib.Path) -> pathlib.Path:
+def write_kml(
+    df: pd.DataFrame | gpd.GeoDataFrame, path: str | pathlib.Path
+) -> pathlib.Path:
     """Write KML points (lon,lat order handled here) for My Maps / Google Earth."""
     path = pathlib.Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)

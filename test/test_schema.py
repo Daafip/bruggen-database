@@ -10,7 +10,12 @@ def _joined():
     return gpd.GeoDataFrame(
         {
             "tags": [
-                {"highway": "services", "name": "B Area", "toilets": "yes", "fuel": "yes"},
+                {
+                    "highway": "services",
+                    "name": "B Area",
+                    "toilets": "yes",
+                    "fuel": "yes",
+                },
                 {"highway": "rest_area", "name": "A Area", "toilets": "no"},
             ],
             "type": ["way", "node"],

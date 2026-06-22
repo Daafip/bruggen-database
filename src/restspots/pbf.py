@@ -13,7 +13,9 @@ import urllib.request
 from .config import CountryConfig
 
 
-def download_extract(cfg: CountryConfig, raw_dir: str | pathlib.Path = "data/raw") -> pathlib.Path:
+def download_extract(
+    cfg: CountryConfig, raw_dir: str | pathlib.Path = "data/raw"
+) -> pathlib.Path:
     """Download the country's Geofabrik extract if not already present; return its path.
 
     The filename carries no date — Geofabrik's ``-latest`` URL is mutable — so record the

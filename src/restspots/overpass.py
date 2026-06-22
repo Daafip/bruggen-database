@@ -30,14 +30,12 @@ def build_query(cfg: CountryConfig, around_m: int = 300, timeout: int = 300) -> 
     YAML so any configured country works without a hand-written query file.
     """
     highway_values = cfg.stop_tags.get("highway", ["services", "rest_area"])
-    stop_lines = "\n  ".join(
-        f'nwr["highway"="{v}"](area.cc);' for v in highway_values
-    )
+    stop_lines = "\n  ".join(f'nwr["highway"="{v}"](area.cc);' for v in highway_values)
     return (
         f"[out:json][timeout:{timeout}];\n"
         f"area{cfg.osm_area}->.cc;\n"
         f"(\n  {stop_lines}\n)->.rest;\n"
-        f"(\n  nwr[\"leisure\"=\"playground\"](around.rest:{around_m});\n)->.play;\n"
+        f'(\n  nwr["leisure"="playground"](around.rest:{around_m});\n)->.play;\n'
         f".rest out geom;\n"
         f".play out geom;\n"
     )
@@ -48,7 +46,9 @@ def load_query_file(path: str | pathlib.Path) -> str:
     return pathlib.Path(path).read_text()
 
 
-def _cache_path(query: str, country: str, raw_dir: pathlib.Path, today: dt.date) -> pathlib.Path:
+def _cache_path(
+    query: str, country: str, raw_dir: pathlib.Path, today: dt.date
+) -> pathlib.Path:
     qhash = hashlib.sha1(query.encode()).hexdigest()[:8]
     return raw_dir / f"osm_{country}_{today.isoformat()}_{qhash}.json"
 

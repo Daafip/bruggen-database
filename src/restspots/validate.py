@@ -37,7 +37,9 @@ def validate(gdf: gpd.GeoDataFrame, df: pd.DataFrame, country: str) -> dict:
     if n:
         missing_id = df[(df["name"].isna()) & (df["motorway_ref"].isna())]
         if len(missing_id):
-            failures.append(f"{len(missing_id)} rows have neither name nor motorway_ref")
+            failures.append(
+                f"{len(missing_id)} rows have neither name nor motorway_ref"
+            )
 
     # Coordinates within the country bbox.
     bbox = COUNTRY_BBOX.get(country.upper())
@@ -48,7 +50,9 @@ def validate(gdf: gpd.GeoDataFrame, df: pd.DataFrame, country: str) -> dict:
             (~df["lon"].between(minx, maxx) | ~df["lat"].between(miny, maxy)).sum()
         )
         if out_of_bbox:
-            failures.append(f"{out_of_bbox} rows fall outside the {country} bounding box")
+            failures.append(
+                f"{out_of_bbox} rows fall outside the {country} bounding box"
+            )
 
     by_match = df["match_type"].value_counts(dropna=False).to_dict() if n else {}
     by_ref = (

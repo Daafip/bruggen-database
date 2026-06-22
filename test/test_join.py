@@ -41,7 +41,9 @@ def _play_gdf():
 
 
 def test_attach_playgrounds_match_types():
-    stops = attach_playgrounds(_rest_gdf(), _play_gdf(), contained_buf=50, proximity_buf=200)
+    stops = attach_playgrounds(
+        _rest_gdf(), _play_gdf(), contained_buf=50, proximity_buf=200
+    )
     # Only the two stops with a playground survive.
     assert len(stops) == 2
     by_name = {t["name"]: mt for t, mt in zip(stops["tags"], stops["match_type"])}
@@ -73,7 +75,9 @@ def test_attach_nearest_within_distance():
         geometry=[Point(6.0001, 52.2)],
         crs=4326,
     )
-    out = attach_nearest(stops, official, ["official_name", "official_ref"], max_distance=300)
+    out = attach_nearest(
+        stops, official, ["official_name", "official_ref"], max_distance=300
+    )
     assert out.iloc[0]["official_ref"] == "A7"
     assert out.iloc[0]["official_name"] == "Offizieller Name"
 
@@ -82,6 +86,8 @@ def test_attach_nearest_empty_points():
     stops = gpd.GeoDataFrame(
         {"tags": [{"highway": "services"}]}, geometry=[Point(6.0, 52.2)], crs=4326
     )
-    empty = gpd.GeoDataFrame({"official_name": [], "official_ref": []}, geometry=[], crs=4326)
+    empty = gpd.GeoDataFrame(
+        {"official_name": [], "official_ref": []}, geometry=[], crs=4326
+    )
     out = attach_nearest(stops, empty, ["official_name", "official_ref"])
     assert "official_ref" in out.columns

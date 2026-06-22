@@ -18,7 +18,11 @@ SYNTHETIC_OVERPASS = {
             "id": 1,
             "lat": 52.1000,
             "lon": 5.1000,
-            "tags": {"highway": "services", "name": "Verzorgingsplaats Speeltuin", "toilets": "yes"},
+            "tags": {
+                "highway": "services",
+                "name": "Verzorgingsplaats Speeltuin",
+                "toilets": "yes",
+            },
         },
         {
             "type": "node",

@@ -18,7 +18,10 @@ def _gold():
             "motorway_ref": ["A7", None],
             "playground_count": [1, 3],
             "match_type": ["proximity", "contained"],
-            "osm_url": ["https://www.openstreetmap.org/node/1", "https://www.openstreetmap.org/way/2"],
+            "osm_url": [
+                "https://www.openstreetmap.org/node/1",
+                "https://www.openstreetmap.org/way/2",
+            ],
             "data_retrieved_at": [dt.date(2026, 6, 22), dt.date(2026, 6, 22)],
         },
         geometry=[Point(6.0, 52.2), Point(7.0, 51.0)],
