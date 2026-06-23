@@ -1,0 +1,10 @@
+{
+  "country": "IT",
+  "osm_snapshot_date": "2026-06-23",
+  "raw_source": "data/raw/italy-latest.osm.pbf",
+  "enrichment": [],
+  "rows": 114,
+  "crs_project": 3035,
+  "proximity_m": 200.0,
+  "contained_buffer_m": 50.0
+}

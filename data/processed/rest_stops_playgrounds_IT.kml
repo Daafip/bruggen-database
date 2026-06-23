@@ -1,0 +1,1259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Placemark id="3">
+            <name>Area di sosta Castelnovo ne' Monti</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/1041029540</description>
+            <Point id="2">
+                <coordinates>10.401395,44.437075,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="5">
+            <name>Area di sosta Castelnovo ne' Monti</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/1041029811</description>
+            <Point id="4">
+                <coordinates>10.402696,44.437032,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="7">
+            <name>Area di sosta Marciana</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/12328690988</description>
+            <Point id="6">
+                <coordinates>10.172412,42.7955,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="9">
+            <name>Parcheggio Comunale Mont-Perron</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/1259822120</description>
+            <Point id="8">
+                <coordinates>7.607231,45.862853,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="11">
+            <name>Area di servizio Case Poloni</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: proximity
+https://www.openstreetmap.org/node/12633270220</description>
+            <Point id="10">
+                <coordinates>12.378454,45.973812,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="13">
+            <name>Area di sosta Boscomare</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/12657973401</description>
+            <Point id="12">
+                <coordinates>7.90596,43.879711,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="15">
+            <name>Canevà</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/12657996501</description>
+            <Point id="14">
+                <coordinates>7.90599,43.879683,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="17">
+            <name>Gotham Studio</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: proximity
+https://www.openstreetmap.org/node/12862729349</description>
+            <Point id="16">
+                <coordinates>10.224313,45.531798,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="19">
+            <name>Area di sosta Castion</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/2621324033</description>
+            <Point id="18">
+                <coordinates>12.236808,46.124475,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="21">
+            <name>Area di sosta Lura</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/2934028602</description>
+            <Point id="20">
+                <coordinates>9.097848,45.964924,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="23">
+            <name>Area di sosta Barisciano</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/3361594739</description>
+            <Point id="22">
+                <coordinates>13.588647,42.337074,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="25">
+            <name>Area di sosta Moiano</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/416576105</description>
+            <Point id="24">
+                <coordinates>14.470326,40.670295,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="27">
+            <name>Esso</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: proximity
+https://www.openstreetmap.org/node/4589801049</description>
+            <Point id="26">
+                <coordinates>11.189184,44.33325,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="29">
+            <name>Area di sosta Rigopiano</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/4618496436</description>
+            <Point id="28">
+                <coordinates>13.784105,42.430258,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="31">
+            <name>Area di servizio Sorico</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: proximity
+https://www.openstreetmap.org/node/4992449828</description>
+            <Point id="30">
+                <coordinates>9.381942,46.17281,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="33">
+            <name>Area di servizio Quartiere Matteotti</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: proximity
+https://www.openstreetmap.org/node/5116712090</description>
+            <Point id="32">
+                <coordinates>13.338538,38.145743,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="35">
+            <name>Area di servizio Quartiere Matteotti</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: proximity
+https://www.openstreetmap.org/node/5116712091</description>
+            <Point id="34">
+                <coordinates>13.338295,38.146228,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="37">
+            <name>Area di sosta Fossano</name>
+            <description>Motorway: A6
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/5826858285</description>
+            <Point id="36">
+                <coordinates>7.722026,44.543563,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="39">
+            <name>Area di sosta Tesero</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/5885384285</description>
+            <Point id="38">
+                <coordinates>11.510789,46.289334,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="41">
+            <name>Area di sosta Pienza</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/9312265117</description>
+            <Point id="40">
+                <coordinates>11.676135,43.079527,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="43">
+            <name>Area di sosta Cadimare</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/9886528911</description>
+            <Point id="42">
+                <coordinates>9.82263,44.082854,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="45">
+            <name>Area di sosta Cadimare</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/9886528916</description>
+            <Point id="44">
+                <coordinates>9.821745,44.082456,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="47">
+            <name>Area di sosta Cadimare</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/9886533717</description>
+            <Point id="46">
+                <coordinates>9.821662,44.082529,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="49">
+            <name>Area di sosta Cadimare</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/9886875151</description>
+            <Point id="48">
+                <coordinates>9.821807,44.082433,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="51">
+            <name>Area di servizio Bornago</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1026709237</description>
+            <Point id="50">
+                <coordinates>9.391734,45.543853,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="53">
+            <name>Area di sosta Tarvisio / Tarvis / Trbiž</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/1058896255</description>
+            <Point id="52">
+                <coordinates>13.580455,46.50496,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="55">
+            <name>Area di sosta Cadimare</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/1078391134</description>
+            <Point id="54">
+                <coordinates>9.822607,44.082821,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="57">
+            <name>Area di servizio Granieri</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1125079620</description>
+            <Point id="56">
+                <coordinates>14.580703,37.129388,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="59">
+            <name>Q8</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1134240488</description>
+            <Point id="58">
+                <coordinates>13.930891,42.514598,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="61">
+            <name>Area di servizio Altarello</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1148264253</description>
+            <Point id="60">
+                <coordinates>14.978196,37.577943,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="63">
+            <name>Sacchitello Nord</name>
+            <description>Motorway: A19
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1149254253</description>
+            <Point id="62">
+                <coordinates>14.340266,37.57852,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="65">
+            <name>Sacchitello Sud</name>
+            <description>Motorway: A19
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1149254254</description>
+            <Point id="64">
+                <coordinates>14.341241,37.577178,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="67">
+            <name>Area di servizio Catenanuova</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1149302413</description>
+            <Point id="66">
+                <coordinates>14.695117,37.561191,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="69">
+            <name>Area di servizio Leonforte</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1153058502</description>
+            <Point id="68">
+                <coordinates>14.406424,37.645514,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="71">
+            <name>Brecciarola Nord</name>
+            <description>Motorway: A25
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/115495185</description>
+            <Point id="70">
+                <coordinates>14.085689,42.325708,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="73">
+            <name>Val di Sona Ovest</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/117494750</description>
+            <Point id="72">
+                <coordinates>10.826693,45.417687,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="75">
+            <name>Area di servizio Chiusa Sclafani</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1184675878</description>
+            <Point id="74">
+                <coordinates>13.274419,37.680503,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="77">
+            <name>Sillaro ovest</name>
+            <description>Motorway: A14
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/121530369</description>
+            <Point id="76">
+                <coordinates>11.598218,44.427945,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="79">
+            <name>Area di servizio San Pellegrino</name>
+            <description>Motorway: A14
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/121531543</description>
+            <Point id="78">
+                <coordinates>13.596011,43.48234,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="81">
+            <name>Piceno est</name>
+            <description>Motorway: A14
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/121531749</description>
+            <Point id="80">
+                <coordinates>13.844042,43.075611,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="83">
+            <name>Crocetta Sud</name>
+            <description>Motorway: A21
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/122023664</description>
+            <Point id="82">
+                <coordinates>8.364045,44.903751,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="85">
+            <name>Q8 Easy</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1221421869</description>
+            <Point id="84">
+                <coordinates>11.30419,43.33704,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="87">
+            <name>Parcheggio Via Giuseppe Maggi ang. Via Veneto</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/122368949</description>
+            <Point id="86">
+                <coordinates>8.733848,45.897183,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="89">
+            <name>Area di Monferrato Est</name>
+            <description>Motorway: A26
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1225928672</description>
+            <Point id="88">
+                <coordinates>8.511131,45.07478,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="91">
+            <name>Area di servizio Trequanda</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1240255958</description>
+            <Point id="90">
+                <coordinates>11.668723,43.187398,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="93">
+            <name>Area di servizio Lineri</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1270702344</description>
+            <Point id="92">
+                <coordinates>15.031524,37.5346,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="95">
+            <name>Aquila</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1276117646</description>
+            <Point id="94">
+                <coordinates>11.194553,43.387948,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="97">
+            <name>Area di servizio Canalicchio</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1283658649</description>
+            <Point id="96">
+                <coordinates>15.090788,37.523184,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="99">
+            <name>Area di servizio Bronte</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1284248529</description>
+            <Point id="98">
+                <coordinates>14.828367,37.782421,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="101">
+            <name>Area di sosta Villarboit Nord</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1311523476</description>
+            <Point id="100">
+                <coordinates>8.345486,45.457416,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="103">
+            <name>Area di servizio Orsogna</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1314218129</description>
+            <Point id="102">
+                <coordinates>14.285713,42.220039,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="105">
+            <name>Area di sosta San Lorenzo ovest</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/1323102590</description>
+            <Point id="104">
+                <coordinates>11.33324,45.42706,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="107">
+            <name>Area di servizio Prozzolo</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1387331363</description>
+            <Point id="106">
+                <coordinates>12.093091,45.362001,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="109">
+            <name>Area di sosta Casoletta</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/1512155198</description>
+            <Point id="108">
+                <coordinates>10.454331,44.452443,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="111">
+            <name>Area di sosta QT8</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/1517057135</description>
+            <Point id="110">
+                <coordinates>9.136633,45.488815,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="113">
+            <name>Area di sosta Meldola</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/160744802</description>
+            <Point id="112">
+                <coordinates>12.062529,44.126253,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="115">
+            <name>Laimburg Ost - Castel Varco Est</name>
+            <description>Motorway: A22
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/171882786</description>
+            <Point id="114">
+                <coordinates>11.294162,46.386286,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="117">
+            <name>Laimburg West - Castel Varco Ovest</name>
+            <description>Motorway: A22
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/179302477</description>
+            <Point id="116">
+                <coordinates>11.288333,46.360534,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="119">
+            <name>Area di Rho Sud</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/211475837</description>
+            <Point id="118">
+                <coordinates>9.039519,45.509466,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="121">
+            <name>Piazza Aldo Moro</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/226154235</description>
+            <Point id="120">
+                <coordinates>8.581761,39.770254,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="123">
+            <name>Area di Stura Est</name>
+            <description>Motorway: A26
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/227941569</description>
+            <Point id="122">
+                <coordinates>8.666035,44.59213,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="125">
+            <name>Novara Nord</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/234546060</description>
+            <Point id="124">
+                <coordinates>8.65777,45.469402,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="127">
+            <name>Area di Villoresi Est</name>
+            <description>Motorway: A8
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/267944967</description>
+            <Point id="126">
+                <coordinates>9.040913,45.559795,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="129">
+            <name>Area di Dorno Est</name>
+            <description>Motorway: A7
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/303739446</description>
+            <Point id="128">
+                <coordinates>8.992196,45.14802,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="131">
+            <name>Area di servizio Paternò</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/303838082</description>
+            <Point id="130">
+                <coordinates>14.897716,37.574765,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="133">
+            <name>Area di servizio Siracusa</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/308498009</description>
+            <Point id="132">
+                <coordinates>15.295984,37.078574,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="135">
+            <name>Area di servizio Carlentini Nord</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/308965735</description>
+            <Point id="134">
+                <coordinates>14.998237,37.295905,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="137">
+            <name>Area di servizio Perazzeta</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/314095088</description>
+            <Point id="136">
+                <coordinates>11.835632,42.033823,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="139">
+            <name>Area di Stradella Sud</name>
+            <description>Motorway: A21
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/315271421</description>
+            <Point id="138">
+                <coordinates>9.31756,45.08275,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="141">
+            <name>Esso</name>
+            <description>Motorway: RA3
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/331941184</description>
+            <Point id="140">
+                <coordinates>11.148302,43.474911,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="143">
+            <name>Area di servizio  Scaligera Est</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/334110373</description>
+            <Point id="142">
+                <coordinates>11.233712,45.410506,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="145">
+            <name>Area di servizio Scaligera Ovest</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/334110395</description>
+            <Point id="144">
+                <coordinates>11.232641,45.411633,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="147">
+            <name>Area di servizio Adige Ovest</name>
+            <description>Motorway: A22
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/338657239</description>
+            <Point id="146">
+                <coordinates>10.911685,45.692778,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="149">
+            <name>Paganella Ovest</name>
+            <description>Motorway: A22
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/37764548</description>
+            <Point id="148">
+                <coordinates>11.085982,46.141451,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="151">
+            <name>Area di servizio Tesina Est</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/380555258</description>
+            <Point id="150">
+                <coordinates>11.62453,45.504353,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="153">
+            <name>Area di Borsana Sud</name>
+            <description>Motorway: A10
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/39439471</description>
+            <Point id="152">
+                <coordinates>8.359998,44.225178,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="155">
+            <name>Area di servizio Stella di Man</name>
+            <description>Motorway: SS12
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/434866879</description>
+            <Point id="154">
+                <coordinates>11.123365,46.03793,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="157">
+            <name>C.O.C.</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/439249223</description>
+            <Point id="156">
+                <coordinates>13.291802,42.626623,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="159">
+            <name>Area di sosta Mezzano</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/440926441</description>
+            <Point id="158">
+                <coordinates>11.812399,46.1568,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="161">
+            <name>Area di servizio Castagnolo est</name>
+            <description>Motorway: A12
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/447971897</description>
+            <Point id="160">
+                <coordinates>10.359468,43.669546,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="163">
+            <name>Area di Ceriale Sud</name>
+            <description>Motorway: A10
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/449704798</description>
+            <Point id="162">
+                <coordinates>8.206766,44.087712,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="165">
+            <name>Area di Ceriale Nord</name>
+            <description>Motorway: A10
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/449704799</description>
+            <Point id="164">
+                <coordinates>8.205813,44.088426,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="167">
+            <name>Area di Conioli</name>
+            <description>Motorway: A10
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/449822944</description>
+            <Point id="166">
+                <coordinates>7.909128,43.850836,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="169">
+            <name>Area di Castellaro Nord</name>
+            <description>Motorway: A10
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/459160636</description>
+            <Point id="168">
+                <coordinates>7.876657,43.860151,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="171">
+            <name>Area di servizio Canalicchio</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/462242967</description>
+            <Point id="170">
+                <coordinates>15.253396,37.105353,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="173">
+            <name>Campogalliano ovest</name>
+            <description>Motorway: A22
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/462980401</description>
+            <Point id="172">
+                <coordinates>10.847095,44.703724,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="175">
+            <name>Area di servizio Marincoli</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/475006388</description>
+            <Point id="174">
+                <coordinates>16.654997,38.845633,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="177">
+            <name>Area di Piccaro Nord</name>
+            <description>Motorway: A10
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/495883776</description>
+            <Point id="176">
+                <coordinates>8.224412,44.10084,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="179">
+            <name>Area di servizio Garda ovest</name>
+            <description>Motorway: SR450
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/547720402</description>
+            <Point id="178">
+                <coordinates>10.779435,45.540479,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="181">
+            <name>Area di Castelnuovo Scrivia Est</name>
+            <description>Motorway: A7
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/59645412</description>
+            <Point id="180">
+                <coordinates>8.853686,44.933989,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="183">
+            <name>Area di servizio Piscina nord</name>
+            <description>Motorway: A55
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/597329676</description>
+            <Point id="182">
+                <coordinates>7.429795,44.907625,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="185">
+            <name>Area di servizio Piscina sud</name>
+            <description>Motorway: A55
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/597329677</description>
+            <Point id="184">
+                <coordinates>7.430226,44.906924,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="187">
+            <name>Area di servizio Montorzo</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/617885033</description>
+            <Point id="186">
+                <coordinates>10.880328,43.691435,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="189">
+            <name>Area di servizio Postumia Sud</name>
+            <description>Motorway: A31
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/61942217</description>
+            <Point id="188">
+                <coordinates>11.598459,45.594237,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="191">
+            <name>Area di servizio Postumia Nord</name>
+            <description>Motorway: A31
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/61942218</description>
+            <Point id="190">
+                <coordinates>11.599877,45.594145,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="193">
+            <name>Area di Pero Nord</name>
+            <description>Motorway: A4
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/64130386</description>
+            <Point id="192">
+                <coordinates>9.070198,45.513715,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="195">
+            <name>Ego</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/651046702</description>
+            <Point id="194">
+                <coordinates>10.636431,44.686776,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="197">
+            <name>Area di servizio Torbole</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/701131630</description>
+            <Point id="196">
+                <coordinates>10.875541,45.871342,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="199">
+            <name>Area di sosta Sindacale</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/732085697</description>
+            <Point id="198">
+                <coordinates>12.871319,45.7054,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="201">
+            <name>Area di sosta Bellizzi</name>
+            <description>Motorway: A2
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/750778104</description>
+            <Point id="200">
+                <coordinates>14.953633,40.62319,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="203">
+            <name>Area di servizio Pianetti</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/751347385</description>
+            <Point id="202">
+                <coordinates>14.711958,36.919473,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="205">
+            <name>Gelso Bianco Sud</name>
+            <description>Motorway: A19
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/767372150</description>
+            <Point id="204">
+                <coordinates>15.008451,37.461631,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="207">
+            <name>Gelso Bianco Nord</name>
+            <description>Motorway: A19
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/767372154</description>
+            <Point id="206">
+                <coordinates>15.008342,37.462264,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="209">
+            <name>Parcheggio poste</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/83897678</description>
+            <Point id="208">
+                <coordinates>12.20735,45.821786,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="211">
+            <name>Povegliano Ovest</name>
+            <description>Motorway: A22
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/857149236</description>
+            <Point id="210">
+                <coordinates>10.89654,45.297513,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="213">
+            <name>Area di sosta Consuma</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/870878071</description>
+            <Point id="212">
+                <coordinates>11.600345,43.782818,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="215">
+            <name>Torre Cerrano est</name>
+            <description>Motorway: A14
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/890764243</description>
+            <Point id="214">
+                <coordinates>14.125393,42.53123,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="217">
+            <name>Area di servizio Santa Teresa</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/892989470</description>
+            <Point id="216">
+                <coordinates>14.158345,42.424776,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="219">
+            <name>Area di servizio Misterbianco</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/896380699</description>
+            <Point id="218">
+                <coordinates>15.003931,37.516455,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="221">
+            <name>Area di servizio Francavilla al Mare</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/902075435</description>
+            <Point id="220">
+                <coordinates>14.296748,42.415397,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="223">
+            <name>Vomano ovest</name>
+            <description>Motorway: A14
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/914979983</description>
+            <Point id="222">
+                <coordinates>13.940344,42.670356,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="225">
+            <name>Area di sosta Dueville</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/944007265</description>
+            <Point id="224">
+                <coordinates>11.549068,45.636595,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="227">
+            <name>Area di sosta Tonezza del Cimone</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/967502127</description>
+            <Point id="226">
+                <coordinates>11.344237,45.857276,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="229">
+            <name>Sangro Est</name>
+            <description>Motorway: A14
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/981257885</description>
+            <Point id="228">
+                <coordinates>14.562805,42.20062,0.0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>
