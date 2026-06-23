@@ -157,4 +157,5 @@ def attach_geometry(df: pd.DataFrame, gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame
     for _, row in gdf.iterrows():
         geom_by_id[_osm_id(row)] = row.geometry
     geoms = [geom_by_id.get(i) for i in df["id"]]
-    return gpd.GeoDataFrame(df.copy(), geometry=geoms, crs=4326)
+    # Wrap in a GeoSeries so an empty result still carries a CRS (a bare [] would not).
+    return gpd.GeoDataFrame(df.copy(), geometry=gpd.GeoSeries(geoms, crs=4326))

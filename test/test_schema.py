@@ -67,3 +67,11 @@ def test_attach_geometry_roundtrip():
     assert isinstance(gdf, gpd.GeoDataFrame)
     assert gdf.geometry.notna().all()
     assert gdf.crs.to_epsg() == 4326
+
+
+def test_attach_geometry_empty_keeps_crs():
+    empty = gpd.GeoDataFrame({"tags": [], "type": [], "id": []}, geometry=[], crs=4326)
+    df = to_canonical(empty, "DE")
+    gdf = attach_geometry(df, empty)
+    assert len(gdf) == 0
+    assert gdf.crs.to_epsg() == 4326

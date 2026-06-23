@@ -37,16 +37,27 @@ stop — the common case).
 
 ```bash
 pixi install                       # installs the geospatial stack from conda-forge
-pixi run all                       # fetch → build → export → validate, for Germany
-# or step by step / another country:
-pixi run python -m restspots.pipeline fetch    --country DE
-pixi run python -m restspots.pipeline build    --country DE
+
+# Germany: use Path B (pyosmium streams the Geofabrik .pbf). A single Overpass query
+# for a whole large country times out, so --source pbf is the reliable route.
+pixi run python -m restspots.pipeline fetch    --country DE --source pbf   # ~4.8 GB download
+pixi run python -m restspots.pipeline build    --country DE --source pbf   # parse + join + enrich
 pixi run python -m restspots.pipeline export   --country DE
 pixi run python -m restspots.pipeline validate --country DE
+
+# Small countries: the Overpass API path (the default) works fine, no download:
+pixi run python -m restspots.pipeline fetch    --country NL
+pixi run python -m restspots.pipeline build    --country NL
 ```
 
-Outputs land in `data/processed/`:
-`rest_stops_playgrounds_<C>.geojson` / `.kml` / `.csv`.
+`pixi run all` chains fetch → build → export → validate (Overpass path) for the default
+country. Outputs land in `data/processed/`:
+`rest_stops_playgrounds_<C>.geojson` / `.kml` / `.csv` (+ `run_metadata_<C>.json`).
+
+**Extraction paths**: `--source overpass` (default) hits the Overpass API — quick and
+download-free, best for small/medium areas; `--source pbf` parses a dated Geofabrik
+`.osm.pbf` with pyosmium — offline, no rate limits, and the only practical route for a
+country the size of Germany.
 
 ### Adding a country
 

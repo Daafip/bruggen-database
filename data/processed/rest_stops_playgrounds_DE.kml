@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="1">
         <Placemark id="3">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -13,7 +13,7 @@ https://www.openstreetmap.org/node/1010486657</description>
             </Point>
         </Placemark>
         <Placemark id="5">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -24,7 +24,7 @@ https://www.openstreetmap.org/node/10180964520</description>
             </Point>
         </Placemark>
         <Placemark id="7">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -35,7 +35,7 @@ https://www.openstreetmap.org/node/1023836665</description>
             </Point>
         </Placemark>
         <Placemark id="9">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -46,7 +46,7 @@ https://www.openstreetmap.org/node/1078792659</description>
             </Point>
         </Placemark>
         <Placemark id="11">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -57,7 +57,7 @@ https://www.openstreetmap.org/node/1085498804</description>
             </Point>
         </Placemark>
         <Placemark id="13">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -68,7 +68,7 @@ https://www.openstreetmap.org/node/10904893714</description>
             </Point>
         </Placemark>
         <Placemark id="15">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -79,7 +79,7 @@ https://www.openstreetmap.org/node/1102070221</description>
             </Point>
         </Placemark>
         <Placemark id="17">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -90,7 +90,7 @@ https://www.openstreetmap.org/node/1102070331</description>
             </Point>
         </Placemark>
         <Placemark id="19">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -101,7 +101,7 @@ https://www.openstreetmap.org/node/1147527589</description>
             </Point>
         </Placemark>
         <Placemark id="21">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -112,7 +112,7 @@ https://www.openstreetmap.org/node/1230762158</description>
             </Point>
         </Placemark>
         <Placemark id="23">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -134,7 +134,7 @@ https://www.openstreetmap.org/node/1269940658</description>
             </Point>
         </Placemark>
         <Placemark id="27">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -145,7 +145,7 @@ https://www.openstreetmap.org/node/1299350169</description>
             </Point>
         </Placemark>
         <Placemark id="29">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -156,7 +156,7 @@ https://www.openstreetmap.org/node/12998028020</description>
             </Point>
         </Placemark>
         <Placemark id="31">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 3
 Type: rest_area
@@ -178,7 +178,7 @@ https://www.openstreetmap.org/node/13287429301</description>
             </Point>
         </Placemark>
         <Placemark id="35">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -189,7 +189,7 @@ https://www.openstreetmap.org/node/1332432578</description>
             </Point>
         </Placemark>
         <Placemark id="37">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -211,7 +211,7 @@ https://www.openstreetmap.org/node/1341128857</description>
             </Point>
         </Placemark>
         <Placemark id="41">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -222,7 +222,7 @@ https://www.openstreetmap.org/node/1355684896</description>
             </Point>
         </Placemark>
         <Placemark id="43">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -244,7 +244,7 @@ https://www.openstreetmap.org/node/13854645001</description>
             </Point>
         </Placemark>
         <Placemark id="47">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -255,7 +255,7 @@ https://www.openstreetmap.org/node/1573157732</description>
             </Point>
         </Placemark>
         <Placemark id="49">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -299,7 +299,7 @@ https://www.openstreetmap.org/node/2333868928</description>
             </Point>
         </Placemark>
         <Placemark id="57">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -409,7 +409,7 @@ https://www.openstreetmap.org/node/3560180176</description>
             </Point>
         </Placemark>
         <Placemark id="77">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -420,7 +420,7 @@ https://www.openstreetmap.org/node/3563764893</description>
             </Point>
         </Placemark>
         <Placemark id="79">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: A3
 Playgrounds: 0
 Type: services
@@ -640,7 +640,7 @@ https://www.openstreetmap.org/node/428838282</description>
             </Point>
         </Placemark>
         <Placemark id="119">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -651,7 +651,7 @@ https://www.openstreetmap.org/node/4409413890</description>
             </Point>
         </Placemark>
         <Placemark id="121">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -673,7 +673,7 @@ https://www.openstreetmap.org/node/5034472620</description>
             </Point>
         </Placemark>
         <Placemark id="125">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -684,7 +684,7 @@ https://www.openstreetmap.org/node/5654591350</description>
             </Point>
         </Placemark>
         <Placemark id="127">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -706,7 +706,7 @@ https://www.openstreetmap.org/node/593988868</description>
             </Point>
         </Placemark>
         <Placemark id="131">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -717,7 +717,7 @@ https://www.openstreetmap.org/node/5968253788</description>
             </Point>
         </Placemark>
         <Placemark id="133">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -772,7 +772,7 @@ https://www.openstreetmap.org/way/110223897</description>
             </Point>
         </Placemark>
         <Placemark id="143">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -849,7 +849,7 @@ https://www.openstreetmap.org/way/120335905</description>
             </Point>
         </Placemark>
         <Placemark id="157">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: A1
 Playgrounds: 1
 Type: services
@@ -926,7 +926,7 @@ https://www.openstreetmap.org/way/127686627</description>
             </Point>
         </Placemark>
         <Placemark id="171">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -959,7 +959,7 @@ https://www.openstreetmap.org/way/129095148</description>
             </Point>
         </Placemark>
         <Placemark id="177">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: services
@@ -1212,7 +1212,7 @@ https://www.openstreetmap.org/way/175854266</description>
             </Point>
         </Placemark>
         <Placemark id="223">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: A9
 Playgrounds: 1
 Type: services
@@ -1894,7 +1894,7 @@ https://www.openstreetmap.org/way/264690622</description>
             </Point>
         </Placemark>
         <Placemark id="347">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -1938,7 +1938,7 @@ https://www.openstreetmap.org/way/284518424</description>
             </Point>
         </Placemark>
         <Placemark id="355">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: A2
 Playgrounds: 1
 Type: services
@@ -2048,7 +2048,7 @@ https://www.openstreetmap.org/way/29872581</description>
             </Point>
         </Placemark>
         <Placemark id="375">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: rest_area
@@ -2191,7 +2191,7 @@ https://www.openstreetmap.org/way/33804997</description>
             </Point>
         </Placemark>
         <Placemark id="401">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area
@@ -2290,7 +2290,7 @@ https://www.openstreetmap.org/way/348708965</description>
             </Point>
         </Placemark>
         <Placemark id="419">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: A2
 Playgrounds: 1
 Type: services
@@ -2312,7 +2312,7 @@ https://www.openstreetmap.org/way/349250405</description>
             </Point>
         </Placemark>
         <Placemark id="423">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: ?
 Playgrounds: 1
 Type: services
@@ -2367,7 +2367,7 @@ https://www.openstreetmap.org/way/351181629</description>
             </Point>
         </Placemark>
         <Placemark id="433">
-            <name>Rest stop</name>
+            <name>Raststätte</name>
             <description>Motorway: A4
 Playgrounds: 1
 Type: services
@@ -3412,7 +3412,7 @@ https://www.openstreetmap.org/way/654401635</description>
             </Point>
         </Placemark>
         <Placemark id="623">
-            <name>Rest stop</name>
+            <name>Rastplatz</name>
             <description>Motorway: ?
 Playgrounds: 2
 Type: rest_area

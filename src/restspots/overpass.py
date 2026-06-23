@@ -84,9 +84,16 @@ def run_overpass(
         endpoint, data={"data": query}, headers=HEADERS, timeout=read_timeout
     )
     resp.raise_for_status()
+    data = resp.json()
+    # Overpass reports server-side failures as a 200 with a `remark`, NOT an HTTP error.
+    # Treat a timeout/error remark as a failure so we don't cache an empty result that
+    # looks like "0 stops" — and so a retry (longer timeout / mirror / Path B) can run.
+    remark = str(data.get("remark", "")).lower()
+    if "runtime error" in remark or "timed out" in remark:
+        raise RuntimeError(f"Overpass query failed: {data['remark']}")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(resp.text)
-    return resp.json()
+    return data
 
 
 def merge_elements(jsons: list[dict]) -> dict:

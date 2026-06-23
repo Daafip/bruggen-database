@@ -9,6 +9,11 @@ on:
       country:
         description: "ISO country code to build"
         default: "DE"
+      source:
+        description: "extraction path: pbf (offline, scales) or overpass (API)"
+        default: "pbf"
+        type: choice
+        options: [pbf, overpass]
 
 permissions:
   contents: read
@@ -25,12 +30,15 @@ jobs:
           manifest-path: pixi.toml
           pixi-version: "latest"
 
+      # Path B (pyosmium streaming) is the default: a single Overpass query for a whole
+      # large country times out, whereas the dated .pbf parses offline at bounded memory.
       - name: Build dataset
         env:
           COUNTRY: ${{ github.event.inputs.country || 'DE' }}
+          SOURCE: ${{ github.event.inputs.source || 'pbf' }}
         run: |
-          pixi run python -m restspots.pipeline fetch    --country "$COUNTRY"
-          pixi run python -m restspots.pipeline build    --country "$COUNTRY"
+          pixi run python -m restspots.pipeline fetch    --country "$COUNTRY" --source "$SOURCE"
+          pixi run python -m restspots.pipeline build    --country "$COUNTRY" --source "$SOURCE"
           pixi run python -m restspots.pipeline export   --country "$COUNTRY"
           pixi run python -m restspots.pipeline validate --country "$COUNTRY"
 
