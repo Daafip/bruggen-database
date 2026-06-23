@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Placemark id="3">
+            <name>Rastplatz Kalwang</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/relation/17514874</description>
+            <Point id="2">
+                <coordinates>14.722916,47.42628,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="5">
+            <name>Raststation</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/relation/4860451</description>
+            <Point id="4">
+                <coordinates>17.114314,47.923424,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="7">
+            <name>Rastplatz</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/1498965566</description>
+            <Point id="6">
+                <coordinates>14.74804,46.577003,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="9">
+            <name>Raststation</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1501953443</description>
+            <Point id="8">
+                <coordinates>14.525409,48.196153,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="11">
+            <name>Rastplatz Maria Ellend</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/157107388</description>
+            <Point id="10">
+                <coordinates>16.661073,48.094957,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="13">
+            <name>Rastplatz Denk</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/189919124</description>
+            <Point id="12">
+                <coordinates>14.455161,48.347497,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="15">
+            <name>Gralla West</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/192707339</description>
+            <Point id="14">
+                <coordinates>15.548282,46.832813,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="17">
+            <name>Raststation Kaiserwald</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/192901592</description>
+            <Point id="16">
+                <coordinates>15.382971,46.959826,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="19">
+            <name>Raststation Loipersdorf</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/192927910</description>
+            <Point id="18">
+                <coordinates>16.060837,47.332098,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="21">
+            <name>Raststation Tauernalm</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/200145931</description>
+            <Point id="20">
+                <coordinates>13.425215,47.248068,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="23">
+            <name>Raststation Pack Preitenegg</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/207488228</description>
+            <Point id="22">
+                <coordinates>14.912308,46.958735,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="25">
+            <name>Rastplatz Schallaburg</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/210456429</description>
+            <Point id="24">
+                <coordinates>15.380651,48.194383,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="27">
+            <name>Rastplatz</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/212719622</description>
+            <Point id="26">
+                <coordinates>13.898534,48.672373,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="29">
+            <name>Rastplatz</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/212719623</description>
+            <Point id="28">
+                <coordinates>13.898879,48.672186,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="31">
+            <name>Raststation Aistersheim</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/245596053</description>
+            <Point id="30">
+                <coordinates>13.74626,48.178846,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="33">
+            <name>Raststation Strengberg</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/322545232</description>
+            <Point id="32">
+                <coordinates>14.666276,48.114742,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="35">
+            <name>Raststation Wörthersee</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/324036372</description>
+            <Point id="34">
+                <coordinates>14.094822,46.630132,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="37">
+            <name>Raststation Mils</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/401257103</description>
+            <Point id="36">
+                <coordinates>10.697646,47.213498,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="39">
+            <name>Rastplatz Herzogenburg</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/405477797</description>
+            <Point id="38">
+                <coordinates>15.717034,48.312529,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="41">
+            <name>Rastplatz Potzneusiedl</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/46158787</description>
+            <Point id="40">
+                <coordinates>16.962194,48.032663,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="43">
+            <name>Raststation Zöbern</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/47027527</description>
+            <Point id="42">
+                <coordinates>16.116909,47.542676,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="45">
+            <name>Raststation Völkermarkt</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/47029582</description>
+            <Point id="44">
+                <coordinates>14.595008,46.679886,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="47">
+            <name>Raststation St. Pölten</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/47029995</description>
+            <Point id="46">
+                <coordinates>15.557513,48.176623,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="49">
+            <name>Raststation Voralpenkreuz</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/47030388</description>
+            <Point id="48">
+                <coordinates>14.035158,48.066408,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="51">
+            <name>Raststation Rosegg</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/528652488</description>
+            <Point id="50">
+                <coordinates>13.999921,46.579474,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="53">
+            <name>Rastplatz Inzersdorf</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/542661862</description>
+            <Point id="52">
+                <coordinates>15.714032,48.310299,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="55">
+            <name>Raststation Haag</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/79589948</description>
+            <Point id="54">
+                <coordinates>14.579749,48.138746,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="57">
+            <name>Rastplatz</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/852784079</description>
+            <Point id="56">
+                <coordinates>16.547002,47.785749,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="59">
+            <name>Raststation Feistritz</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/894093001</description>
+            <Point id="58">
+                <coordinates>13.670052,46.683971,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="61">
+            <name>Raststation Schnann</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/896823217</description>
+            <Point id="60">
+                <coordinates>10.374071,47.148931,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="63">
+            <name>Rastplatz</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/94248839</description>
+            <Point id="62">
+                <coordinates>12.417401,47.299754,0.0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

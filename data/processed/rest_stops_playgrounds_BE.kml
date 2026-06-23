@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Placemark id="3">
+            <name>Parking Middelkerke</name>
+            <description>Motorway: ?
+Playgrounds: 2
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/11183994737</description>
+            <Point id="2">
+                <coordinates>2.819729,51.18701,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="5">
+            <name>Parking Hertsberge</name>
+            <description>Motorway: ?
+Playgrounds: 1
+Type: rest_area
+Match: proximity
+https://www.openstreetmap.org/node/9952454919</description>
+            <Point id="4">
+                <coordinates>3.291588,51.119269,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="7">
+            <name>Minderhout</name>
+            <description>Motorway: E19
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1005353439</description>
+            <Point id="6">
+                <coordinates>4.703154,51.419221,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="9">
+            <name>Kruibeke-Noord</name>
+            <description>Motorway: E17
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1025593411</description>
+            <Point id="8">
+                <coordinates>4.289542,51.185027,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="11">
+            <name>Parking Kalken (Zuid)</name>
+            <description>Motorway: E17
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1136952420</description>
+            <Point id="10">
+                <coordinates>3.920845,51.069941,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="13">
+            <name>Parking Kalken (Noord)</name>
+            <description>Motorway: E17
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/1136952421</description>
+            <Point id="12">
+                <coordinates>3.920171,51.071983,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="15">
+            <name>Aire d'Aische-en-Refail</name>
+            <description>Motorway: E411
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/238934525</description>
+            <Point id="14">
+                <coordinates>4.791315,50.599728,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="17">
+            <name>Aire de Spy</name>
+            <description>Motorway: E42
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/369427323</description>
+            <Point id="16">
+                <coordinates>4.701669,50.494874,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="19">
+            <name>Aire de Couthuin</name>
+            <description>Motorway: E42
+Playgrounds: 2
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/369732635</description>
+            <Point id="18">
+                <coordinates>5.122902,50.539294,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="21">
+            <name>Aire de Tignée</name>
+            <description>Motorway: E40;E42
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/369912128</description>
+            <Point id="20">
+                <coordinates>5.709501,50.654661,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="23">
+            <name>Dienstenzone Jabbeke</name>
+            <description>Motorway: E40
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/401423785</description>
+            <Point id="22">
+                <coordinates>3.105453,51.188005,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="25">
+            <name>Dienstenzone Drongen-Zuid</name>
+            <description>Motorway: E40
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/434733974</description>
+            <Point id="24">
+                <coordinates>3.638641,51.033182,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="27">
+            <name>Halveweg / Zolder</name>
+            <description>Motorway: E314
+Playgrounds: 2
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/472678462</description>
+            <Point id="26">
+                <coordinates>5.33238,51.012036,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="29">
+            <name>Nazareth-Zuid</name>
+            <description>Motorway: E17
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/626741849</description>
+            <Point id="28">
+                <coordinates>3.608019,50.970239,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="31">
+            <name>Parking Wommelgem</name>
+            <description>Motorway: E34;E313
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/678645006</description>
+            <Point id="30">
+                <coordinates>4.54814,51.208174,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="33">
+            <name>Dienstenzone Drongen-Noord</name>
+            <description>Motorway: E40
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/700103113</description>
+            <Point id="32">
+                <coordinates>3.638087,51.035425,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="35">
+            <name>Rustplaats Gentbrugge-Zuid</name>
+            <description>Motorway: E17
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/851905492</description>
+            <Point id="34">
+                <coordinates>3.783704,51.041589,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="37">
+            <name>Aire de Nantimont</name>
+            <description>Motorway: E25;E411
+Playgrounds: 2
+Type: rest_area
+Match: contained
+https://www.openstreetmap.org/way/89579671</description>
+            <Point id="36">
+                <coordinates>5.605815,49.713668,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="39">
+            <name>Heverlee Noord</name>
+            <description>Motorway: E40
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/965000826</description>
+            <Point id="38">
+                <coordinates>4.658846,50.853966,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="41">
+            <name>Heverlee Zuid</name>
+            <description>Motorway: E40
+Playgrounds: 1
+Type: services
+Match: contained
+https://www.openstreetmap.org/way/965000827</description>
+            <Point id="40">
+                <coordinates>4.658058,50.852248,0.0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

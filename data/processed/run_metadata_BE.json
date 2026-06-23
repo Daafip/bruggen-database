@@ -1,0 +1,10 @@
+{
+  "country": "BE",
+  "osm_snapshot_date": "2026-06-23",
+  "raw_source": "data/raw/belgium-latest.osm.pbf",
+  "enrichment": [],
+  "rows": 20,
+  "crs_project": 3035,
+  "proximity_m": 200.0,
+  "contained_buffer_m": 50.0
+}

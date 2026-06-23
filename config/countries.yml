@@ -71,3 +71,30 @@ AT:
   labels:
     services: Raststation
     rest_area: Rastplatz
+
+BE:
+  iso: BE
+  osm_area: '["ISO3166-1"="BE"][admin_level=2]'
+  geofabrik_url: https://download.geofabrik.de/europe/belgium-latest.osm.pbf
+  stop_tags:
+    highway: [services, rest_area]
+  playground_proximity_m: 200
+  playground_contained_buffer_m: 50
+  enrichment: []   # regional open-data portals could enrich later
+  labels:
+    # "Parking" works in both Dutch and French — the common Belgian motorway term.
+    services: Parking
+    rest_area: Parking
+
+FR:
+  iso: FR
+  osm_area: '["ISO3166-1"="FR"][admin_level=2]'
+  geofabrik_url: https://download.geofabrik.de/europe/france-latest.osm.pbf
+  stop_tags:
+    highway: [services, rest_area]
+  playground_proximity_m: 200
+  playground_contained_buffer_m: 50
+  enrichment: []   # data.gouv.fr / APRR / Sanef could enrich later
+  labels:
+    services: Aire de service
+    rest_area: Aire de repos

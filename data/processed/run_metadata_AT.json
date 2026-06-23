@@ -1,0 +1,10 @@
+{
+  "country": "AT",
+  "osm_snapshot_date": "2026-06-23",
+  "raw_source": "data/raw/osm_AT_2026-06-23_d549ad9f.json",
+  "enrichment": [],
+  "rows": 31,
+  "crs_project": 3035,
+  "proximity_m": 200.0,
+  "contained_buffer_m": 50.0
+}
