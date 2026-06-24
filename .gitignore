@@ -18,6 +18,8 @@ docs/reference
 .vscode
 /docs/_site
 # pipeline data: bronze/silver are reproducible from dated snapshots; keep dirs only
+data/raw
+data/raw/gitkeep
 data/raw/*
 data/interim/*
 !data/**/.gitkeep

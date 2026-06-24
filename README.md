@@ -1,4 +1,4 @@
-# Speeltuinen langs de snelweg — rest stops with playgrounds
+# Bruggen database
 
 Find highway rest stops that have a playground and export them as a clean dataset that
 drops straight into a Google Maps layer. Germany ships first; adding a country is a

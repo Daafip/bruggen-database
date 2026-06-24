@@ -15,19 +15,6 @@ playgrounds (`leisure=playground`).
   publish the produced dataset, keep this attribution and license the derived database
   compatibly. Add the "© OpenStreetMap contributors" credit to any map UI.
 
-## Autobahn GmbH API — German federal open data
-
-Used for German enrichment (official Rastplatz names + motorway refs) via
-`https://verkehr.autobahn.de/o/autobahn`.
-
-- German federal open data. **Verify the current terms on the API page** and attribute
-  accordingly before publishing.
-
-## Wikidata — CC0
-
-Optional enrichment (names, operators). [CC0](https://creativecommons.org/publicdomain/zero/1.0/) —
-no attribution required, but noted here for completeness.
-
 ## National sources (expansion)
 
 Each national connector's licence must be verified as it is added and recorded here:
@@ -35,6 +22,3 @@ Each national connector's licence must be verified as it is added and recorded h
 | Country | Source | Licence |
 |---|---|---|
 | 🇳🇱 Netherlands | RWS / NDW open data | verify per dataset |
-| 🇦🇹 Austria | ASFINAG open data | verify per dataset |
-| 🇫🇷 France | data.gouv.fr / APRR / Sanef | verify per dataset |
-| 🇨🇭 Switzerland | opendata.swiss / ASTRA | verify per dataset |
