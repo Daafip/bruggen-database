@@ -8,9 +8,12 @@ repos:
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: debug-statements
+      # Don't rewrite generated data artifacts (GeoJSON/KML/CSV/HTML exports, metadata).
       - id: end-of-file-fixer
+        exclude: '^data/'
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
+        exclude: '^data/'
 
   - repo: https://github.com/adrienverge/yamllint
     rev: "v1.35.1"
