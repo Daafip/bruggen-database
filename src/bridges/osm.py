@@ -44,7 +44,9 @@ def to_gdf(overpass_json: dict) -> gpd.GeoDataFrame:
     """Convert raw Overpass JSON to a WGS84 GeoDataFrame (tags under the ``tags`` column)."""
     fc = json2geojson(overpass_json)
     if not fc.get("features"):
-        return gpd.GeoDataFrame({"tags": [], "type": [], "id": []}, geometry=[], crs=4326)
+        return gpd.GeoDataFrame(
+            {"tags": [], "type": [], "id": []}, geometry=[], crs=4326
+        )
     gdf = gpd.GeoDataFrame.from_features(fc["features"], crs=4326)
     if "tags" not in gdf.columns:
         gdf["tags"] = [{} for _ in range(len(gdf))]

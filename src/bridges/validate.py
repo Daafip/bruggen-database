@@ -40,7 +40,9 @@ def validate(gdf: gpd.GeoDataFrame, df: pd.DataFrame, country: str) -> dict:
             (~df["lon"].between(minx, maxx) | ~df["lat"].between(miny, maxy)).sum()
         )
         if out_of_bbox:
-            failures.append(f"{out_of_bbox} rows fall outside the {country} bounding box")
+            failures.append(
+                f"{out_of_bbox} rows fall outside the {country} bounding box"
+            )
 
     def _counts(col: str, top: int | None = None) -> dict:
         if not n or col not in df.columns:

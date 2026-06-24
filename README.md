@@ -45,6 +45,7 @@ pixi install                       # installs the geospatial stack from conda-fo
 pixi run python -m bridges.pipeline fetch    --country NL --source pbf   # ~1.3 GB download
 pixi run python -m bridges.pipeline build    --country NL --source pbf   # parse + classify + schema
 pixi run python -m bridges.pipeline export   --country NL
+pixi run python -m bridges.pipeline viewer   --country NL   # lightweight Leaflet HTML map
 pixi run python -m bridges.pipeline validate --country NL
 
 # Iterative / small-area work: the Overpass API path, restricted to a bounding box:
@@ -52,8 +53,21 @@ pixi run python -m bridges.pipeline fetch --country NL --bbox 52.150,4.470,52.17
 pixi run python -m bridges.pipeline build --country NL --bbox 52.150,4.470,52.175,4.505
 ```
 
-`pixi run all` chains fetch → build → export → validate (Path B) for NL. Outputs land in
-`data/processed/`: `bridges_<C>.geojson` / `.kml` / `.csv` (+ `run_metadata_bridges_<C>.json`).
+`pixi run all` chains fetch → build → export → viewer → validate (Path B) for NL. Outputs
+land in `data/processed/`: `bridges_<C>.geojson` / `.kml` / `.csv` (+
+`run_metadata_bridges_<C>.json`).
+
+### Preview the data
+
+The full GeoJSON is too large for Google's preview, so `viewer` renders a **single,
+lightweight HTML map** (`bridges_<C>_viewer.html`, a few MB) you can open straight in a
+browser: every bridge as a client-side cluster, plus the movable bridges as colour-coded
+markers with popups. The data is embedded in the file; Leaflet and the map tiles load from
+their usual CDN/tile servers (so it needs internet to *render*, like any web map).
+
+```bash
+pixi run viewer && xdg-open data/processed/bridges_NL_viewer.html
+```
 
 **Extraction paths**: `--source overpass` (default) hits the Overpass API — quick and
 download-free, best with `--bbox` for a small area; `--source pbf` parses a dated Geofabrik

@@ -29,6 +29,7 @@ dependencies = [
   "osm2geojson",
   "osmium",
   "pydantic",
+  "folium",
 ]
 
 [project.scripts]

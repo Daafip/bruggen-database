@@ -1,14 +1,19 @@
 # YAML 1.2
 ---
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: bruggen-database
+abstract: "A reproducible pipeline that builds a database of bridges (Netherlands) with their properties from OpenStreetMap, and exports it as GeoJSON / KML / CSV."
 authors:
   -
     affiliation: "HKV lijn in water"
     family-names: Haasnoot
     given-names: David
-
-cff-version: "0.0.1"
+version: "0.0.1"
+license: "GPL-3.0-or-later"
+repository-code: "https://github.com/HKV-products-services/bruggen-database"
 keywords:
   - OpenData
-license: "GPL-3.0-or-later"
-message: "If you use this software, please cite it using these metadata."
-title: bruggen-database
+  - OpenStreetMap
+  - bridges
+  - GIS

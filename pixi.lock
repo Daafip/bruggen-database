@@ -934,7 +934,7 @@ packages:
 - pypi: ./src
   name: bridges
   version: 0.0.1
-  sha256: f9b3e225a3dbb021031278cfec5047c7e5218effc780c491aafdd8bdcc4e6e54
+  sha256: 1bdba65899153ff42a53888fab56e7d2c47c97bb3c98a1e683a1d8b1e7f015ea
   requires_dist:
   - geopandas
   - shapely
@@ -946,6 +946,7 @@ packages:
   - osm2geojson
   - osmium
   - pydantic
+  - folium
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/brotli-1.2.0-hed03a55_1.conda
   sha256: e511644d691f05eb12ebe1e971fd6dc3ae55a4df5c253b4e1788b789bdf2dfa6

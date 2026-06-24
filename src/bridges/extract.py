@@ -91,7 +91,13 @@ def from_pbf(pbf_path, cfg: BridgeConfig) -> gpd.GeoDataFrame:  # noqa: ARG001
         if geom is None:
             continue
         rows.append(
-            {"tags": tags, "type": otype, "id": obj.id, "geometry": geom, "feature_kind": kind}
+            {
+                "tags": tags,
+                "type": otype,
+                "id": obj.id,
+                "geometry": geom,
+                "feature_kind": kind,
+            }
         )
 
     if not rows:

@@ -64,8 +64,14 @@ def cmd_fetch(args) -> int:
     else:
         from . import query
 
-        mode = "bbox" if bbox else (f"{len(cfg.regions)} regions" if cfg.regions else "single query")
-        print(f"[fetch] OSM bridges for {cfg.iso} ({mode}) -> {p['raw']}/ via {args.endpoint}")
+        mode = (
+            "bbox"
+            if bbox
+            else (f"{len(cfg.regions)} regions" if cfg.regions else "single query")
+        )
+        print(
+            f"[fetch] OSM bridges for {cfg.iso} ({mode}) -> {p['raw']}/ via {args.endpoint}"
+        )
         _, data = query.fetch_country(
             cfg,
             raw_dir=p["raw"],
@@ -91,7 +97,11 @@ def _load_bridges(args, cfg, p):
         gdf = extract.from_pbf(pbf_path, cfg)
         return gdf, pbf_path, dt.date.today()
 
-    raw_file = _latest_raw(p["raw"], cfg.iso) if not _bbox(args) else _latest_raw_bbox(p["raw"], cfg.iso)
+    raw_file = (
+        _latest_raw(p["raw"], cfg.iso)
+        if not _bbox(args)
+        else _latest_raw_bbox(p["raw"], cfg.iso)
+    )
     print(f"[build] reading {raw_file}")
     gdf = extract.from_overpass(json.loads(raw_file.read_text()))
     return gdf, raw_file, _snapshot_date(raw_file)
@@ -125,7 +135,7 @@ def cmd_build(args) -> int:
     if len(gold):
         gold.to_file(gold_path, driver="GeoJSON")
     else:
-        gold_path.write_text('{"type":"FeatureCollection","features":[]}')
+        gold_path.write_text('{"type":"FeatureCollection","features":[]}\n')
 
     _write_metadata(p["processed"], cfg, raw_file, retrieved_at, len(df))
     print(f"[build] wrote gold dataset -> {gold_path} ({len(df)} rows)")
@@ -145,6 +155,22 @@ def cmd_export(args) -> int:
     paths = export_mod.write_all(gdf, df, p["processed"], cfg.iso)
     for fmt, path in paths.items():
         print(f"[export] {fmt:8s} -> {path}")
+    return 0
+
+
+def cmd_viewer(args) -> int:
+    cfg = get_country(args.country, args.config)
+    p = _paths(args)
+    from . import viewer
+
+    csv_path = p["processed"] / f"bridges_{cfg.iso}.csv"
+    if not csv_path.exists():
+        raise FileNotFoundError(f"{csv_path} missing. Run `export` first.")
+    out = viewer.build_viewer(
+        csv_path, p["processed"] / f"bridges_{cfg.iso}_viewer.html", country=cfg.iso
+    )
+    size_mb = out.stat().st_size / 1e6
+    print(f"[viewer] wrote {out} ({size_mb:.1f} MB)")
     return 0
 
 
@@ -187,8 +213,10 @@ def _write_metadata(processed, cfg, raw_file, retrieved_at, n_rows) -> None:
         "rows": n_rows,
         "proj_crs": cfg.proj_crs,
     }
+    # Trailing newline so the file is POSIX-clean and stable across re-runs (no
+    # end-of-file-fixer churn on every rebuild).
     (processed / f"run_metadata_bridges_{cfg.iso}.json").write_text(
-        json.dumps(meta, indent=2)
+        json.dumps(meta, indent=2) + "\n"
     )
 
 
@@ -196,6 +224,7 @@ COMMANDS = {
     "fetch": cmd_fetch,
     "build": cmd_build,
     "export": cmd_export,
+    "viewer": cmd_viewer,
     "validate": cmd_validate,
 }
 
@@ -203,12 +232,16 @@ COMMANDS = {
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="bridges", description=__doc__)
     parser.add_argument("command", choices=list(COMMANDS), help="pipeline stage to run")
-    parser.add_argument("--country", default="NL", help="ISO country code (default: NL)")
+    parser.add_argument(
+        "--country", default="NL", help="ISO country code (default: NL)"
+    )
     parser.add_argument("--config", default=None, help="path to bridges.yml")
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--interim-dir", default="data/interim")
     parser.add_argument("--processed-dir", default="data/processed")
-    parser.add_argument("--endpoint", default=None, help="Overpass endpoint (or 'mirror')")
+    parser.add_argument(
+        "--endpoint", default=None, help="Overpass endpoint (or 'mirror')"
+    )
     parser.add_argument("--query-timeout", type=int, default=300)
     parser.add_argument("--read-timeout", type=int, default=360)
     parser.add_argument(

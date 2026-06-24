@@ -49,13 +49,23 @@ def test_from_overpass_filters_and_labels():
         "features": [
             {
                 "type": "Feature",
-                "properties": {"type": "way", "id": 1, "tags": {"bridge": "yes", "highway": "primary"}},
-                "geometry": {"type": "LineString", "coordinates": [[4.0, 52.0], [4.001, 52.0]]},
+                "properties": {
+                    "type": "way",
+                    "id": 1,
+                    "tags": {"bridge": "yes", "highway": "primary"},
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[4.0, 52.0], [4.001, 52.0]],
+                },
             },
             {
                 "type": "Feature",
                 "properties": {"type": "way", "id": 2, "tags": {"highway": "primary"}},
-                "geometry": {"type": "LineString", "coordinates": [[4.0, 52.0], [4.001, 52.0]]},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[4.0, 52.0], [4.001, 52.0]],
+                },
             },
         ],
     }
@@ -92,7 +102,9 @@ def _bridge_gdf():
         },
         geometry=[
             LineString([(4.48, 52.16), (4.4808, 52.16)]),  # ~55 m E-W
-            Polygon([(4.49, 52.16), (4.4902, 52.16), (4.4902, 52.1602), (4.49, 52.1602)]),
+            Polygon(
+                [(4.49, 52.16), (4.4902, 52.16), (4.4902, 52.1602), (4.49, 52.1602)]
+            ),
             LineString([(4.50, 52.16), (4.5005, 52.16)]),
         ],
         crs=4326,
@@ -128,10 +140,29 @@ def test_to_canonical_fields():
 
 
 def test_to_canonical_empty():
-    empty = gpd.GeoDataFrame({"tags": [], "type": [], "id": [], "feature_kind": []}, geometry=[], crs=4326)
+    empty = gpd.GeoDataFrame(
+        {"tags": [], "type": [], "id": [], "feature_kind": []}, geometry=[], crs=4326
+    )
     df = schema.to_canonical(empty, "NL", proj_crs=28992)
     assert list(df.columns) == schema.CANONICAL_FIELDS
     assert len(df) == 0
+
+
+# -------------------------------------------------------------------------- viewer
+def test_build_viewer(tmp_path):
+    from bridges.viewer import build_viewer
+
+    csv = tmp_path / "bridges_NL.csv"
+    pd_df = schema.to_canonical(_bridge_gdf(), "NL", proj_crs=28992)
+    pd_df.to_csv(csv, index=False)
+
+    out = build_viewer(csv, tmp_path / "viewer.html", country="NL")
+    assert out.exists()
+    html = out.read_text()
+    assert "leaflet" in html.lower()
+    assert "Bridges of NL" in html  # legend title
+    assert "Movable bridges (1)" in html  # one movable bridge in the fixture
+    assert "bascule" in html
 
 
 # ------------------------------------------------------------------------ validate

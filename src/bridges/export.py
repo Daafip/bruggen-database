@@ -49,7 +49,9 @@ def write_csv_wkt(
         out["longitude"] = out.get("lon", out.geometry.centroid.x)
         out = pd.DataFrame(out.drop(columns="geometry"))
     else:
-        out["WKT"] = [f"POINT ({lon} {lat})" for lon, lat in zip(out["lon"], out["lat"])]
+        out["WKT"] = [
+            f"POINT ({lon} {lat})" for lon, lat in zip(out["lon"], out["lat"])
+        ]
         out["latitude"] = out["lat"]
         out["longitude"] = out["lon"]
     _warn_mymaps(len(out))
@@ -68,7 +70,9 @@ def write_kml(
         p = kml.newpoint(name=(r.get("name") or r.get("bridge_type") or "Bridge"))
         p.coords = [(r["lon"], r["lat"])]
         movable = f"\nMovable: {r.get('movable')}" if r.get("movable") else ""
-        length = f"\nLength: {r.get('length_m')} m" if pd.notna(r.get("length_m")) else ""
+        length = (
+            f"\nLength: {r.get('length_m')} m" if pd.notna(r.get("length_m")) else ""
+        )
         p.description = (
             f"Type: {r.get('bridge_type') or '?'} ({r.get('feature_kind') or '?'})\n"
             f"Structure: {r.get('structure') or '?'}{movable}\n"

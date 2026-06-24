@@ -18,8 +18,9 @@ pre-commit = "pre-commit run --all-files"
 fetch    = "python -m bridges.pipeline fetch    --country NL --source pbf"
 build    = "python -m bridges.pipeline build    --country NL --source pbf"
 export   = "python -m bridges.pipeline export   --country NL"
+viewer   = "python -m bridges.pipeline viewer   --country NL"   # lightweight Leaflet HTML map
 validate = "python -m bridges.pipeline validate --country NL"
-all      = { depends-on = ["fetch", "build", "export", "validate"] }
+all      = { depends-on = ["fetch", "build", "export", "viewer", "validate"] }
 
 test     = "pytest -q"
 
@@ -59,6 +60,7 @@ requests = "*"
 pyyaml = "*"
 simplekml = "*"
 pyosmium = ">=4.3.1,<5"
+folium = ">=0.20.0,<0.21"
 
 [pypi-dependencies]
 bridges = { path = "src", editable = true }
