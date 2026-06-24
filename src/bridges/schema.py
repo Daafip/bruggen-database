@@ -17,6 +17,8 @@ from pydantic import BaseModel
 
 CANONICAL_FIELDS = [
     "id",
+    "group_id",
+    "group_size",
     "name",
     "country",
     "lat",
@@ -49,6 +51,10 @@ class Bridge(BaseModel):
     """One OSM bridge — the canonical record."""
 
     id: str
+    # Shared by all OSM features that make up one physical bridge (assigned post-hoc by
+    # bridges.group; None until grouping runs). group_size is the feature count in the group.
+    group_id: str | None = None
+    group_size: int = 1
     name: str | None = None
     country: str
     lat: float

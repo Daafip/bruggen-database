@@ -52,9 +52,11 @@ def validate(gdf: gpd.GeoDataFrame, df: pd.DataFrame, country: str) -> dict:
             vc = vc.head(top)
         return {str(k): int(v) for k, v in vc.items()}
 
+    physical = int(df["group_id"].nunique()) if n and "group_id" in df.columns else n
     return {
         "country": country,
-        "total_bridges": n,
+        "total_features": n,
+        "physical_bridges": physical,  # distinct group_id (one per real bridge)
         "movable_bridges": int(df["is_movable"].sum()) if n else 0,
         "named": int(df["name"].notna().sum()) if n else 0,
         "geometry_valid": geom_valid,

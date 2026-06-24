@@ -14,7 +14,7 @@ import pathlib
 import sys
 
 from . import export as export_mod
-from . import extract, osm, schema
+from . import extract, group, osm, schema
 from . import validate as validate_mod
 from .config import get_country
 
@@ -126,6 +126,15 @@ def cmd_build(args) -> int:
         gdf, cfg.iso, proj_crs=cfg.proj_crs, retrieved_at=retrieved_at
     )
     gold = schema.attach_geometry(df, gdf)
+
+    # Collapse the OSM features that make up one physical bridge into a shared group_id
+    # (same carries_type within group_distance_m), so the data/map stop double-counting.
+    gold = group.assign_groups(
+        gold, distance_m=cfg.group_distance_m, crs=cfg.proj_crs, country=cfg.iso
+    )
+    if len(gold):
+        n_groups = gold["group_id"].nunique()
+        print(f"[build] grouped {len(gold)} features into {n_groups} physical bridges")
 
     p["interim"].mkdir(parents=True, exist_ok=True)
     if len(gdf):

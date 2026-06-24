@@ -7,7 +7,8 @@ reality diverged from the plan — plus what to watch next.
 
 | metric | value |
 |---|---|
-| bridges total | **125,183** (101,444 carriageway · 23,739 structure) |
+| OSM features | **125,183** (101,444 carriageway · 23,739 structure) |
+| physical bridges (grouped) | **99,959** (shared `group_id`; see D10) |
 | movable | **2,566** — 1,235 bascule · 271 swing · 220 drawbridge · 145 lift · … |
 | aqueducts | 64 |
 | with span length | 99,906 (computed in EPSG:28992 / RD New) |
@@ -72,6 +73,20 @@ A national bridge set is tens of thousands of rows — far past the My Maps 2,00
 The full database is a legitimate deliverable, so the CSV/KML writers **warn** and write the
 file anyway (the original rest-stops exporter hard-failed). Split per province/type only when
 loading into My Maps; GeoJSON / the Datasets API have no cap.
+
+### D10 — Grouping is type-constrained connected components, not plain clustering
+One physical bridge is mapped as many OSM features (viaduct segments, dual carriageways,
+structure outline + carriageway). Plain spatial clustering would merge a footbridge with the
+car bridge running beside it. **Decision: link two features only if they are within
+`group_distance_m` (25 m, in the national grid) *and* share a `carries_type`**, then take
+connected components → `group_id` (see [`src/bridges/group.py`](src/bridges/group.py)). A
+missing `carries_type` (bare structure outline) is its own bucket, never a bridge between two
+real types. Result for NL: 125,183 features → 99,959 physical bridges, with **zero** groups
+mixing carries types (verified). `group_id` is numbered by the smallest member OSM id, so it
+is deterministic across re-runs. Features are kept (not dissolved) and tagged with
+`group_id`/`group_size`; the map collapses to one marker per group. Two same-type bridges
+that genuinely sit < 25 m apart will merge — an accepted trade-off, tunable per country via
+`group_distance_m`.
 
 ---
 

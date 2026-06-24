@@ -30,6 +30,9 @@ class BridgeConfig(BaseModel):
     # Metric CRS (EPSG) for length/width. Default is pan-European LAEA; NL overrides with
     # EPSG:28992 (RD New) for accurate spans.
     proj_crs: int = 3035
+    # Features of the same carries_type within this distance (metres, in proj_crs) are
+    # grouped as one physical bridge (segments / dual carriageways / structure+carriageway).
+    group_distance_m: float = 25.0
     # Optional Overpass area selectors to fetch the country in pieces (one query each,
     # merged into a single snapshot) — for countries too large for a single query.
     regions: list[str] = Field(default_factory=list)

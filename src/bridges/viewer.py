@@ -1,13 +1,14 @@
 """Lightweight self-contained HTML map of the bridge dataset (Leaflet via folium).
 
 The full GeoJSON is too large for Google's preview, so this renders the points into a
-single HTML file with the data embedded:
+single HTML file with the data embedded. Features are first **collapsed by ``group_id``**
+(see :mod:`bridges.group`) so one physical bridge is one marker, not the cluster of segments
+OSM splits it into:
 
-* **All bridges** — a client-side cluster (``FastMarkerCluster``) of every point, so 125 k
-  features stay responsive in the browser (only ~3 MB of coordinates are embedded, not a
-  marker object per point).
-* **Movable bridges** — the navigation-relevant subset, as colour-coded markers with
-  popups (name, type, mechanism, what it carries, OSM link).
+* **All bridges** — a client-side cluster (``FastMarkerCluster``) of one point per group.
+* **Movable bridges** — the navigation-relevant subset (a group is movable if any of its
+  features is), as colour-coded markers with popups (name, type, mechanism, what it carries,
+  segment count, OSM link).
 
 The HTML is one file with the data inlined; Leaflet itself and the map tiles load from
 their usual CDN / tile servers, so an internet connection is needed to *render* it (true of
@@ -45,6 +46,39 @@ def _is_true(series: pd.Series) -> pd.Series:
     return series.map(lambda v: str(v).strip().lower() == "true")
 
 
+def _first(series: pd.Series):
+    """First non-blank value in a group, else None."""
+    for v in series:
+        if isinstance(v, str) and v.strip():
+            return v
+    return None
+
+
+def _collapse_to_groups(df: pd.DataFrame) -> pd.DataFrame:
+    """One row per physical bridge: collapse features sharing a ``group_id``.
+
+    The representative point is the group's mean lat/lon; a group counts as movable if any
+    of its features is. Returns ``df`` unchanged if there is no ``group_id`` column.
+    """
+    if "group_id" not in df.columns or df["group_id"].isna().all():
+        return df
+    grp = df.groupby("group_id", sort=False)
+    out = pd.DataFrame(
+        {
+            "lat": grp["lat"].mean(),
+            "lon": grp["lon"].mean(),
+            "name": grp["name"].apply(_first),
+            "bridge_type": grp["bridge_type"].apply(_first),
+            "carries": grp["carries"].apply(_first),
+            "movable": grp["movable"].apply(_first),
+            "osm_url": grp["osm_url"].apply(_first),
+            "is_movable": grp["is_movable"].apply(lambda s: bool(_is_true(s).any())),
+            "n_features": grp.size(),
+        }
+    ).reset_index()
+    return out
+
+
 def build_viewer(
     csv_path: str | pathlib.Path,
     out_html: str | pathlib.Path,
@@ -60,8 +94,11 @@ def build_viewer(
     out_html = pathlib.Path(out_html)
     df = pd.read_csv(csv_path, low_memory=False)
     df = df.dropna(subset=["lat", "lon"])
+    # Collapse the OSM features of each physical bridge to a single representative point.
+    df = _collapse_to_groups(df)
 
     m = folium.Map(location=center or NL_CENTER, zoom_start=zoom, tiles="OpenStreetMap")
+    e = html.escape
 
     # Layer 1 — every bridge, clustered (lightweight: coordinates only).
     all_coords = df[["lat", "lon"]].to_numpy().tolist()
@@ -79,14 +116,18 @@ def build_viewer(
         carries = _clean(r.get("carries")) or "?"
         btype = _clean(r.get("bridge_type")) or "?"
         url = _clean(r.get("osm_url"))
+        n_feat = int(r.get("n_features", 1) or 1)
+        seg = f"segments: {n_feat}<br>" if n_feat > 1 else ""
         # Escape free-text OSM values (names can contain &, <, quotes) before HTML interpolation.
-        e = html.escape
         popup = folium.Popup(
             f"<b>{e(name)}</b><br>"
             f"type: {e(btype)}<br>"
             f"mechanism: {e(mech)}<br>"
             f"carries: {e(carries)}<br>"
-            + (f'<a href="{e(url, quote=True)}" target="_blank">OSM</a>' if url else ""),
+            f"{seg}"
+            + (
+                f'<a href="{e(url, quote=True)}" target="_blank">OSM</a>' if url else ""
+            ),
             max_width=260,
         )
         folium.CircleMarker(
@@ -117,17 +158,17 @@ def _add_legend(m, country: str, n_total: int, n_movable: int) -> None:
         f'background:{c};border-radius:50%;margin-right:4px"></span>{k}<br>'
         for k, c in list(MOVABLE_COLOURS.items())
     )
-    html = (
+    legend_html = (
         '<div style="position:fixed;bottom:20px;left:20px;z-index:9999;'
         "background:white;padding:10px 12px;border:1px solid #999;border-radius:6px;"
         'font:12px/1.4 sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.3)">'
         f"<b>Bridges of {country}</b><br>"
-        f"{n_total:,} total · {n_movable:,} movable<br>"
+        f"{n_total:,} bridges · {n_movable:,} movable<br>"
         '<hr style="margin:6px 0">'
         "<b>movable mechanism</b><br>"
         f"{swatches}"
         f'<span style="display:inline-block;width:10px;height:10px;'
-        f"background:{DEFAULT_MOVABLE_COLOUR};border-radius:50%;margin-right:4px\"></span>other"
+        f'background:{DEFAULT_MOVABLE_COLOUR};border-radius:50%;margin-right:4px"></span>other'
         "</div>"
     )
-    m.get_root().html.add_child(folium.Element(html))
+    m.get_root().html.add_child(folium.Element(legend_html))

@@ -35,6 +35,13 @@ the functional tags) or `structure` (a `man_made=bridge` outline). Movable bridg
 (`bridge:movable=bascule|swing|lift|drawbridge`) and aqueducts (`bridge=aqueduct`) — the
 features that matter for waterway navigation — are flagged explicitly.
 
+**Grouping.** One physical bridge is often mapped as several OSM features (a long viaduct
+split into segments, the two carriageways of a divided road). The build assigns a shared
+`group_id` to features that are within `group_distance_m` *and* carry the same thing — so a
+long bridge collapses to one record, but a footbridge is never merged with the car bridge
+beside it. For NL this collapses ≈ 125 k features into ≈ 100 k physical bridges; the map
+shows one marker per group.
+
 ## Usage
 
 ```bash
@@ -61,8 +68,9 @@ land in `data/processed/`: `bridges_<C>.geojson` / `.kml` / `.csv` (+
 
 The full GeoJSON is too large for Google's preview, so `viewer` renders a **single,
 lightweight HTML map** (`bridges_<C>_viewer.html`, a few MB) you can open straight in a
-browser: every bridge as a client-side cluster, plus the movable bridges as colour-coded
-markers with popups. The data is embedded in the file; Leaflet and the map tiles load from
+browser: one marker per physical bridge (grouped) in a client-side cluster, plus the
+movable bridges as colour-coded markers with popups. The data is embedded in the file;
+Leaflet and the map tiles load from
 their usual CDN/tile servers (so it needs internet to *render*, like any web map).
 
 ```bash

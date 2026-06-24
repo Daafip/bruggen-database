@@ -5,11 +5,13 @@ parsing, and validation — no Overpass / .pbf access.
 """
 
 import geopandas as gpd
-from shapely.geometry import LineString, Polygon
+import pandas as pd
+from shapely.geometry import LineString, Point, Polygon
 
 from bridges import schema, validate
 from bridges.config import get_country
 from bridges.extract import classify
+from bridges.group import assign_groups
 from bridges.query import build_query
 
 
@@ -130,8 +132,6 @@ def test_to_canonical_fields():
     assert structure["feature_kind"] == "structure"
     assert structure["bridge_type"] == "structure"
     assert structure["structure"] == "arch"
-    import pandas as pd
-
     assert pd.isna(structure["length_m"])  # polygon: no span length
 
     aqueduct = df[df["id"] == "way/103"].iloc[0]
@@ -148,7 +148,69 @@ def test_to_canonical_empty():
     assert len(df) == 0
 
 
+# --------------------------------------------------------------------------- group
+def _group_gdf():
+    # A,B: two road segments ~7 m apart (same type → merge).
+    # C: a footbridge ~10 m from A (cross-type → must NOT merge).
+    # D: a road segment ~68 m away (too far → own group).
+    return gpd.GeoDataFrame(
+        {
+            "id": ["way/1", "way/2", "way/3", "way/4"],
+            "carries_type": ["road", "road", "foot", "road"],
+        },
+        geometry=[
+            Point(4.90000, 52.0),
+            Point(4.90010, 52.0),
+            Point(4.90015, 52.0),
+            Point(4.90100, 52.0),
+        ],
+        crs=4326,
+    )
+
+
+def test_assign_groups_same_type_merges_cross_type_does_not():
+    out = assign_groups(_group_gdf(), distance_m=25, crs=28992, country="NL")
+    gid = dict(zip(out["id"], out["group_id"]))
+    size = dict(zip(out["id"], out["group_size"]))
+    assert gid["way/1"] == gid["way/2"]  # close, same type → one bridge
+    assert gid["way/3"] != gid["way/1"]  # footbridge beside the road → kept separate
+    assert gid["way/4"] != gid["way/1"]  # too far → separate
+    assert size["way/1"] == 2 and size["way/3"] == 1
+    assert out["group_id"].nunique() == 3
+
+
+def test_assign_groups_empty():
+    empty = gpd.GeoDataFrame({"id": [], "carries_type": []}, geometry=[], crs=4326)
+    out = assign_groups(empty, country="NL")
+    assert "group_id" in out.columns and len(out) == 0
+
+
 # -------------------------------------------------------------------------- viewer
+def test_collapse_to_groups():
+    from bridges.viewer import _collapse_to_groups
+
+    df = pd.DataFrame(
+        {
+            "group_id": ["NL-000001", "NL-000001", "NL-000002"],
+            "lat": [52.0, 52.0, 53.0],
+            "lon": [4.0, 4.0, 5.0],
+            "name": [None, "Brug X", None],
+            "bridge_type": ["yes", "yes", "movable"],
+            "carries": ["highway=primary", "highway=primary", None],
+            "movable": [None, None, "bascule"],
+            "osm_url": ["u1", "u2", "u3"],
+            "is_movable": [False, False, True],
+        }
+    )
+    out = _collapse_to_groups(df)
+    assert len(out) == 2  # two physical bridges from three features
+    g1 = out[out["group_id"] == "NL-000001"].iloc[0]
+    assert g1["name"] == "Brug X"  # first non-blank name wins
+    assert int(g1["n_features"]) == 2
+    g2 = out[out["group_id"] == "NL-000002"].iloc[0]
+    assert bool(g2["is_movable"])
+
+
 def test_build_viewer(tmp_path):
     from bridges.viewer import build_viewer
 
@@ -172,7 +234,7 @@ def test_validate_report():
     geo = schema.attach_geometry(df, gdf)
     report = validate.validate(geo, df, "NL")
     assert report["passed"]
-    assert report["total_bridges"] == 3
+    assert report["total_features"] == 3
     assert report["movable_bridges"] == 1
     assert report["by_feature_kind"]["carriageway"] == 2
     assert report["by_carries_type"]["water"] == 1

@@ -180,6 +180,8 @@ Canonical schema (`src/bridges/schema.py`):
 | Field | Type | Source |
 |---|---|---|
 | `id` | str | OSM `type/id` (e.g. `way/12345`) |
+| `group_id` | str | shared by all features of one physical bridge (see grouping below) |
+| `group_size` | int | feature count in the group |
 | `name` | str\|None | `name`, falling back to `bridge:name` |
 | `country` | str | ISO 3166-1 alpha-2 |
 | `lat`, `lon` | float | WGS84 centroid |
@@ -201,6 +203,16 @@ Canonical schema (`src/bridges/schema.py`):
 | `data_retrieved_at` | date | OSM snapshot date |
 
 A bridge need not have a name — most are unnamed — so naming is not a validation requirement.
+
+**Grouping (`src/bridges/group.py`).** One physical bridge is mapped as many OSM features —
+a long viaduct split into segments, the two carriageways of a divided road, a
+`man_made=bridge` outline plus the way over it. After the schema mapping, features are linked
+into connected components when they lie within `group_distance_m` (25 m, in `proj_crs`) **and**
+share a `carries_type`, and each component gets a shared `group_id`. The type constraint is
+what stops a footbridge being merged with the car bridge beside it (`road` only groups with
+`road`, `foot` with `foot`); a missing `carries_type` is its own bucket. For NL this collapses
+≈ 125 k features to ≈ 100 k physical bridges. Features are kept and tagged (not dissolved), so
+consumers can group or expand as needed.
 
 ---
 
