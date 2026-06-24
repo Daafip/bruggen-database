@@ -3,16 +3,12 @@
 authors:
   -
     affiliation: "HKV lijn in water"
-    family-names: Dupuits
-    given-names: Guy
-  -
-    affiliation: "HKV lijn in water"
     family-names: Haasnoot
     given-names: David
 
 cff-version: "0.0.1"
 keywords:
-  - Waterveiligheid
+  - OpenData
 license: "GPL-3.0-or-later"
 message: "If you use this software, please cite it using these metadata."
 title: Speeltuinen_langs_snelweg
