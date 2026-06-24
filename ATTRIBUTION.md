@@ -1,12 +1,13 @@
 # Attribution & data licences
 
-This project derives data from several open sources. Any published map or redistributed
-dataset **must** carry the attributions below.
+This project derives data from OpenStreetMap. Any published map or redistributed dataset
+**must** carry the attribution below.
 
 ## OpenStreetMap — ODbL
 
-Primary source for both rest stops (`highway=services`, `highway=rest_area`) and
-playgrounds (`leisure=playground`).
+Primary (and currently only) source for bridges: ways tagged `bridge=*` and features tagged
+`man_made=bridge`, with their attributes (`bridge:structure`, `bridge:movable`, `name`,
+`layer`, `width`, `maxweight`, `maxheight`, …) and full geometry.
 
 > © OpenStreetMap contributors
 
@@ -15,10 +16,12 @@ playgrounds (`leisure=playground`).
   publish the produced dataset, keep this attribution and license the derived database
   compatibly. Add the "© OpenStreetMap contributors" credit to any map UI.
 
-## National sources (expansion)
+## National sources (potential enrichment)
 
-Each national connector's licence must be verified as it is added and recorded here:
+Not yet used. If a connector is added (e.g. Rijkswaterstaat / Nationaal Wegenbestand
+*kunstwerken* for official names and exact clearances), verify its licence and record it
+here:
 
 | Country | Source | Licence |
 |---|---|---|
-| 🇳🇱 Netherlands | RWS / NDW open data | verify per dataset |
+| 🇳🇱 Netherlands | RWS / NWB open data | verify per dataset |

@@ -931,6 +931,22 @@ packages:
   - pkg:pypi/branca?source=hash-mapping
   size: 30176
   timestamp: 1759755695447
+- pypi: ./src
+  name: bridges
+  version: 0.0.1
+  sha256: f9b3e225a3dbb021031278cfec5047c7e5218effc780c491aafdd8bdcc4e6e54
+  requires_dist:
+  - geopandas
+  - shapely
+  - pyproj
+  - pandas
+  - requests
+  - pyyaml
+  - simplekml
+  - osm2geojson
+  - osmium
+  - pydantic
+  editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/brotli-1.2.0-hed03a55_1.conda
   sha256: e511644d691f05eb12ebe1e971fd6dc3ae55a4df5c253b4e1788b789bdf2dfa6
   md5: 8ccf913aaba749a5496c17629d859ed1
@@ -6553,22 +6569,6 @@ packages:
   - pkg:pypi/requests?source=compressed-mapping
   size: 68709
   timestamp: 1778851103479
-- pypi: ./src
-  name: restspots
-  version: 0.0.1
-  sha256: 6e3d727c462d84c115991a0917bd62debeeaab17742e510d5d33f5a78709f60b
-  requires_dist:
-  - geopandas
-  - shapely
-  - pyproj
-  - pandas
-  - requests
-  - pyyaml
-  - simplekml
-  - osm2geojson
-  - osmium
-  - pydantic
-  editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/rpds-py-0.22.3-py312h12e396e_0.conda
   sha256: e8662d21ca3c912ac8941725392b838a29458b106ef22d9489cdf0f8de145fad
   md5: bfb49da0cc9098597d527def04d66f8b

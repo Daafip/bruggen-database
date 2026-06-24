@@ -1,7 +1,7 @@
 [workspace]
-name = "Speeltuinen_langs_snelweg"
+name = "bruggen-database"
 version = "0.0.1"
-description = "Speeltuinen langs de snelweg"
+description = "Database of bridges (Netherlands) with their properties, built from OpenStreetMap"
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64", "osx-64"]
 readme = "README.md"
@@ -13,12 +13,14 @@ license-file = "LICENSE"
 install = "pre-commit install"
 pre-commit = "pre-commit run --all-files"
 
-# Data pipeline (default country DE)
-fetch    = "python -m restspots.pipeline fetch    --country DE"
-build    = "python -m restspots.pipeline build    --country DE"
-export   = "python -m restspots.pipeline export   --country DE"
-validate = "python -m restspots.pipeline validate --country DE"
+# Bridge database (default country NL). The whole of NL is too large for a single Overpass
+# query, so the national build uses Path B (Geofabrik .pbf streamed with pyosmium).
+fetch    = "python -m bridges.pipeline fetch    --country NL --source pbf"
+build    = "python -m bridges.pipeline build    --country NL --source pbf"
+export   = "python -m bridges.pipeline export   --country NL"
+validate = "python -m bridges.pipeline validate --country NL"
 all      = { depends-on = ["fetch", "build", "export", "validate"] }
+
 test     = "pytest -q"
 
 [tool.ruff]
@@ -59,5 +61,5 @@ simplekml = "*"
 pyosmium = ">=4.3.1,<5"
 
 [pypi-dependencies]
-restspots = { path = "src", editable = true }
+bridges = { path = "src", editable = true }
 osm2geojson = "*"   # Overpass JSON -> GeoJSON (pip-only)

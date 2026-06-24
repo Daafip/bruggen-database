@@ -1,0 +1,18 @@
+# Per-country configuration for the BRIDGES pipeline (Part B of plan.md).
+#
+# Mirrors config/countries.yml: adding a country is a YAML block, not a rewrite.
+# A bridge IS the feature (no secondary spatial join), so the config is smaller.
+#
+# Fields:
+#   iso             ISO 3166-1 alpha-2 code (also used in output filenames)
+#   osm_area        Overpass area selector for the country boundary
+#   geofabrik_url   dated .osm.pbf extract (Path B — the reliable route for a whole country)
+#   proj_crs        metric CRS (EPSG) used for length/width; pick the national grid for accuracy
+#   regions         optional Overpass area selectors to fetch in pieces (large countries)
+
+
+NL:
+  iso: NL
+  osm_area: '["ISO3166-1"="NL"][admin_level=2]'
+  geofabrik_url: https://download.geofabrik.de/europe/netherlands-latest.osm.pbf
+  proj_crs: 28992   # Amersfoort / RD New — the Dutch national grid, accurate spans/widths

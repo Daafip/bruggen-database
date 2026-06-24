@@ -3,15 +3,15 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.version]
-path = "restspots/__init__.py"
+path = "bridges/__init__.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["restspots"]
+packages = ["bridges"]
 
 [project]
-name = "restspots"
+name = "bridges"
 version = "0.0.1"
-description = "Find highway rest stops with playgrounds and export them for Google Maps (Speeltuinen langs de snelweg)"
+description = "Build a database of bridges (Netherlands) with their properties from OpenStreetMap, and export for Google Maps / GIS"
 readme = "README.md"
 license = {text = "GNU-GPL V3"}
 authors = [
@@ -32,8 +32,7 @@ dependencies = [
 ]
 
 [project.scripts]
-restspots = "restspots.pipeline:main"
+bridges = "bridges.pipeline:main"
 
 [project.urls]
-Documentation = "https://hkv-products-services.github.io/Speeltuinen_langs_snelweg"
-Source = "https://github.com/HKV-products-services/Speeltuinen_langs_snelweg"
+Source = "https://github.com/HKV-products-services/bruggen-database"
