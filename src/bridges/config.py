@@ -31,8 +31,14 @@ class BridgeConfig(BaseModel):
     # EPSG:28992 (RD New) for accurate spans.
     proj_crs: int = 3035
     # Features of the same carries_type within this distance (metres, in proj_crs) are
-    # grouped as one physical bridge (segments / dual carriageways / structure+carriageway).
+    # grouped as one physical bridge (split segments / adjacent carriageways).
     group_distance_m: float = 25.0
+    # Wider distance at which same-carries_type features crossing the SAME waterway are
+    # grouped — catches the two carriageways of a divided road over one canal/river.
+    group_water_distance_m: float = 80.0
+    # Distance at which features sharing the same name are grouped, regardless of
+    # carries_type (e.g. the road + cycle parts of a named bridge like "Plantagebrug").
+    group_name_distance_m: float = 60.0
     # Optional Overpass area selectors to fetch the country in pieces (one query each,
     # merged into a single snapshot) — for countries too large for a single query.
     regions: list[str] = Field(default_factory=list)

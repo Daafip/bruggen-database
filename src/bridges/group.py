@@ -5,16 +5,20 @@ segments, the two carriageways of a divided road, or a ``man_made=bridge`` outli
 ``bridge=*`` way over it. Left ungrouped, the dataset double-counts and the map shows a
 cluster of pins where there is one bridge.
 
-This assigns a shared ``group_id`` to features that are **close together** *and* **carry the
-same thing** (``carries_type``), using connected components: two features are linked if they
-lie within ``distance_m`` of each other and have an equal ``carries_type``. The
-type constraint is what keeps a footbridge from being merged with the car bridge beside it —
-``road`` only groups with ``road``, ``foot`` with ``foot``, and so on (a missing
-``carries_type``, e.g. a bare structure outline, groups only with other missing-type
-features).
+Features are linked into connected components by three rules; any link merges them:
 
-``group_id`` is deterministic (groups are numbered by their smallest member OSM id), so a
-re-run on the same snapshot is byte-stable.
+1. **same kind, adjacent** — within ``distance_m`` and equal ``carries_type``
+   (split segments / touching carriageways). A missing ``carries_type`` is its own bucket,
+   so a bare structure outline never bridges two real types.
+2. **same crossing** — within ``water_distance_m``, equal ``carries_type``, and crossing the
+   **same waterway** (``water_id``). This is the divided-road case: the two carriageways over
+   one canal/river become a single bridge even when they sit tens of metres apart.
+3. **same name** — within ``name_distance_m`` and an equal (case-folded) ``name``, *regardless
+   of* ``carries_type``. This collapses the road + cycle parts of a named bridge (e.g. the
+   "Plantagebrug" in Delft) that rule 1 would keep apart.
+
+``group_id`` is deterministic (groups numbered by their smallest member OSM id), so a re-run
+on the same snapshot is byte-stable.
 """
 
 from __future__ import annotations
@@ -22,10 +26,10 @@ from __future__ import annotations
 from collections import defaultdict
 
 import geopandas as gpd
+import pandas as pd
 
-_NO_TYPE = (
-    "__none__"  # sentinel so missing carries_type groups only with itself, not NaN!=NaN
-)
+_NO_TYPE = "__none__"  # so a missing carries_type groups only with itself, not NaN!=NaN
+_WATER_SNAP_M = 8.0  # a bridge is "over" a waterway if within this many metres of it
 
 
 class _UnionFind:
@@ -46,17 +50,36 @@ class _UnionFind:
             self.parent[max(ra, rb)] = min(ra, rb)
 
 
+def _norm_name(value) -> str | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    return " ".join(value.split()).casefold()
+
+
+def _pairs(sub: gpd.GeoDataFrame, distance: float):
+    """Yield index pairs (i, j) with i < j for features within ``distance`` of each other."""
+    if not len(sub):
+        return
+    joined = gpd.sjoin(sub, sub, predicate="dwithin", distance=distance)
+    for li, ri in zip(joined.index, joined["index_right"]):
+        if li < ri:
+            yield int(li), int(ri)
+
+
 def assign_groups(
     gdf: gpd.GeoDataFrame,
+    waterways: gpd.GeoDataFrame | None = None,
     distance_m: float = 25.0,
+    water_distance_m: float = 80.0,
+    name_distance_m: float = 60.0,
     crs: int = 28992,
     country: str = "NL",
 ) -> gpd.GeoDataFrame:
     """Return ``gdf`` with ``group_id`` and ``group_size`` columns.
 
-    Features within ``distance_m`` (measured in ``crs``) that share a ``carries_type`` are
-    assigned the same ``group_id`` (``"<country>-NNNNNN"``); ``group_size`` is the number of
-    features in that group. The input is returned unchanged in order and geometry.
+    See the module docstring for the three linking rules. ``waterways`` (``[water_id,
+    geometry]``) enables rule 2; if it is None/empty that rule is simply skipped. The input
+    is returned unchanged in order and geometry.
     """
     out = gdf.copy()
     n = len(out)
@@ -71,27 +94,39 @@ def assign_groups(
         if "carries_type" in g.columns
         else [_NO_TYPE] * n
     )
+    names = [_norm_name(v) for v in (g["name"] if "name" in g.columns else [None] * n)]
     orig_id = out["id"].to_numpy()  # positional, matches g
+    valid = (g.geometry.notna() & ~g.geometry.is_empty).to_numpy()
+
+    water_id = _assign_water(g, waterways, crs) if waterways is not None else [None] * n
 
     uf = _UnionFind(n)
-    valid = g.geometry.notna() & ~g.geometry.is_empty
-    sub = g.loc[valid, ["geometry"]]
-    if len(sub):
-        # Self spatial join: every pair of features within distance_m of each other.
-        pairs = gpd.sjoin(sub, sub, predicate="dwithin", distance=distance_m)
-        for li, ri in zip(pairs.index, pairs["index_right"]):
-            if li < ri and ct[li] == ct[ri]:  # same carries_type only
-                uf.union(int(li), int(ri))
+
+    # Rule 1 — adjacent, same carries_type.
+    for li, ri in _pairs(g.loc[valid, ["geometry"]], distance_m):
+        if ct[li] == ct[ri]:
+            uf.union(li, ri)
+
+    # Rule 2 — same carries_type crossing the same waterway (divided-road carriageways).
+    has_water = valid & pd.notna(pd.array(water_id, dtype="object"))
+    for li, ri in _pairs(g.loc[has_water, ["geometry"]], water_distance_m):
+        if ct[li] == ct[ri] and water_id[li] == water_id[ri]:
+            uf.union(li, ri)
+
+    # Rule 3 — same name, regardless of carries_type.
+    named = valid & pd.notna(pd.array(names, dtype="object"))
+    for li, ri in _pairs(g.loc[named, ["geometry"]], name_distance_m):
+        if names[li] == names[ri]:
+            uf.union(li, ri)
 
     members: dict[int, list[int]] = defaultdict(list)
     for i in range(n):
         members[uf.find(i)].append(i)
 
-    # Number groups deterministically by their smallest member OSM id.
     ordered = sorted(
         members.values(), key=lambda idxs: min(str(orig_id[k]) for k in idxs)
     )
-    group_id = [None] * n
+    group_id: list[str | None] = [None] * n
     group_size = [0] * n
     for gi, idxs in enumerate(ordered, start=1):
         gid = f"{country}-{gi:06d}"
@@ -102,3 +137,16 @@ def assign_groups(
     out["group_id"] = group_id
     out["group_size"] = group_size
     return out
+
+
+def _assign_water(g: gpd.GeoDataFrame, waterways: gpd.GeoDataFrame, crs: int) -> list:
+    """For each feature, the ``water_id`` of the waterway it sits on (within a few metres)."""
+    n = len(g)
+    if waterways is None or not len(waterways):
+        return [None] * n
+    wm = waterways.to_crs(crs)[["water_id", "geometry"]]
+    nearest = gpd.sjoin_nearest(
+        g[["geometry"]], wm, how="left", max_distance=_WATER_SNAP_M, distance_col="_d"
+    )
+    nearest = nearest[~nearest.index.duplicated(keep="first")]
+    return list(nearest["water_id"].reindex(range(n)).to_numpy())

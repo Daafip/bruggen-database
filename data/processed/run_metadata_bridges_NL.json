@@ -1,6 +1,6 @@
 {
   "country": "NL",
-  "osm_snapshot_date": "2026-06-24",
+  "osm_snapshot_date": "2026-06-25",
   "raw_source": "data/raw/netherlands-latest.osm.pbf",
   "rows": 125183,
   "proj_crs": 28992

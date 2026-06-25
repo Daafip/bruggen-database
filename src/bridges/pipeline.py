@@ -86,7 +86,7 @@ def cmd_fetch(args) -> int:
 
 
 def _load_bridges(args, cfg, p):
-    """Return ``(gdf, raw_path, retrieved_at)`` from whichever extract path is selected."""
+    """Return ``(bridges, waterways, raw_path, retrieved_at)`` for the selected extract path."""
     if getattr(args, "source", "overpass") == "pbf":
         if getattr(args, "pbf", None):
             pbf_path = pathlib.Path(args.pbf)
@@ -94,8 +94,8 @@ def _load_bridges(args, cfg, p):
             print(f"[build] ensuring Geofabrik extract for {cfg.iso} (large download)")
             pbf_path = osm.download_extract(cfg, p["raw"])
         print(f"[build] streaming {pbf_path} with pyosmium")
-        gdf = extract.from_pbf(pbf_path, cfg)
-        return gdf, pbf_path, dt.date.today()
+        gdf, waterways = extract.from_pbf(pbf_path, cfg)
+        return gdf, waterways, pbf_path, dt.date.today()
 
     raw_file = (
         _latest_raw(p["raw"], cfg.iso)
@@ -103,8 +103,8 @@ def _load_bridges(args, cfg, p):
         else _latest_raw_bbox(p["raw"], cfg.iso)
     )
     print(f"[build] reading {raw_file}")
-    gdf = extract.from_overpass(json.loads(raw_file.read_text()))
-    return gdf, raw_file, _snapshot_date(raw_file)
+    gdf, waterways = extract.from_overpass(json.loads(raw_file.read_text()))
+    return gdf, waterways, raw_file, _snapshot_date(raw_file)
 
 
 def _latest_raw_bbox(raw: pathlib.Path, country: str) -> pathlib.Path:
@@ -119,18 +119,25 @@ def _latest_raw_bbox(raw: pathlib.Path, country: str) -> pathlib.Path:
 def cmd_build(args) -> int:
     cfg = get_country(args.country, args.config)
     p = _paths(args)
-    gdf, raw_file, retrieved_at = _load_bridges(args, cfg, p)
-    print(f"[build] {len(gdf)} bridge features")
+    gdf, waterways, raw_file, retrieved_at = _load_bridges(args, cfg, p)
+    print(f"[build] {len(gdf)} bridge features, {len(waterways)} waterways")
 
     df = schema.to_canonical(
         gdf, cfg.iso, proj_crs=cfg.proj_crs, retrieved_at=retrieved_at
     )
     gold = schema.attach_geometry(df, gdf)
 
-    # Collapse the OSM features that make up one physical bridge into a shared group_id
-    # (same carries_type within group_distance_m), so the data/map stop double-counting.
+    # Collapse the OSM features that make up one physical bridge into a shared group_id:
+    # adjacent same-type segments, divided-road carriageways over the same waterway, and
+    # same-name parts — so the data/map stop double-counting.
     gold = group.assign_groups(
-        gold, distance_m=cfg.group_distance_m, crs=cfg.proj_crs, country=cfg.iso
+        gold,
+        waterways=waterways,
+        distance_m=cfg.group_distance_m,
+        water_distance_m=cfg.group_water_distance_m,
+        name_distance_m=cfg.group_name_distance_m,
+        crs=cfg.proj_crs,
+        country=cfg.iso,
     )
     if len(gold):
         n_groups = gold["group_id"].nunique()

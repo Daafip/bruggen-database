@@ -7,14 +7,18 @@
 #   iso               ISO 3166-1 alpha-2 code (also used in output filenames)
 #   osm_area          Overpass area selector for the country boundary
 #   geofabrik_url     dated .osm.pbf extract (Path B — the reliable route for a whole country)
-#   proj_crs          metric CRS (EPSG) used for length/width; pick the national grid for accuracy
-#   group_distance_m  same-carries_type features within this many metres are one physical bridge
-#   regions           optional Overpass area selectors to fetch in pieces (large countries)
+#   proj_crs                metric CRS (EPSG) used for length/width; pick the national grid
+#   group_distance_m        same-carries_type features within this many metres are one bridge
+#   group_water_distance_m  same-type features crossing the SAME waterway within this distance
+#   group_name_distance_m   same-name features within this distance are one bridge (any type)
+#   regions                 optional Overpass area selectors to fetch in pieces (large countries)
 
 
 NL:
   iso: NL
   osm_area: '["ISO3166-1"="NL"][admin_level=2]'
   geofabrik_url: https://download.geofabrik.de/europe/netherlands-latest.osm.pbf
-  proj_crs: 28992        # Amersfoort / RD New — the Dutch national grid, accurate spans/widths
-  group_distance_m: 25   # segments / dual carriageways within 25 m collapse to one bridge
+  proj_crs: 28992             # Amersfoort / RD New — Dutch national grid, accurate spans
+  group_distance_m: 25        # split segments / adjacent carriageways collapse to one bridge
+  group_water_distance_m: 80  # divided-road carriageways over the same canal/river → one
+  group_name_distance_m: 60   # road + cycle parts sharing a name (e.g. Plantagebrug) → one

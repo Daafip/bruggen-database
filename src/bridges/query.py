@@ -23,15 +23,17 @@ def build_query(
     area: str | None = None,
     bbox: tuple[float, float, float, float] | None = None,
 ) -> str:
-    """Build an Overpass query for every bridge in an area.
+    """Build an Overpass query for every bridge in an area, plus the waterways it may cross.
 
     Selects ways carrying a ``bridge`` tag (other than ``no``) — the carriageway on the
-    bridge — plus ``man_made=bridge`` ways/relations — the bridge structure outline.
+    bridge — plus ``man_made=bridge`` ways/relations (the structure outline), and river /
+    canal / stream centrelines (used to detect bridges crossing the *same* body of water).
 
     ``area`` overrides the country boundary selector (e.g. an ISO3166-2 region) for
     piecewise fetching; ``bbox`` (``south, west, north, east`` in WGS84) restricts to a
     bounding box instead — handy for fast iterative testing.
     """
+    water = 'way["waterway"~"^(river|canal|stream)$"]'
     if bbox is not None:
         s, w, n, e = bbox
         scope = f"({s},{w},{n},{e})"
@@ -41,8 +43,9 @@ def build_query(
             f'  way["bridge"]["bridge"!="no"]{scope};\n'
             f'  way["man_made"="bridge"]{scope};\n'
             f'  relation["man_made"="bridge"]{scope};\n'
-            f")->.b;\n"
-            f".b out geom;\n"
+            f"  {water}{scope};\n"
+            f");\n"
+            f"out geom;\n"
         )
     area = area or cfg.osm_area
     return (
@@ -52,19 +55,16 @@ def build_query(
         f'  way["bridge"]["bridge"!="no"](area.cc);\n'
         f'  way["man_made"="bridge"](area.cc);\n'
         f'  relation["man_made"="bridge"](area.cc);\n'
-        f")->.b;\n"
-        f".b out geom;\n"
+        f"  {water}(area.cc);\n"
+        f");\n"
+        f"out geom;\n"
     )
 
 
 def _cache_path(
     query: str, country: str, raw_dir: pathlib.Path, today: dt.date
 ) -> pathlib.Path:
-    """Dated, content-hashed cache name (``osm_bridges_<C>_<date>_<hash>.json``).
-
-    Prefixed ``osm_bridges_`` so bridge snapshots never collide with the rest-stops
-    pipeline's ``osm_<C>_`` files in the same ``data/raw/``.
-    """
+    """Dated, content-hashed cache name (``osm_bridges_<C>_<date>_<hash>.json``)."""
     qhash = hashlib.sha1(query.encode()).hexdigest()[:8]
     return raw_dir / f"osm_bridges_{country}_{today.isoformat()}_{qhash}.json"
 

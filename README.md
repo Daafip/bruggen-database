@@ -36,11 +36,14 @@ the functional tags) or `structure` (a `man_made=bridge` outline). Movable bridg
 features that matter for waterway navigation — are flagged explicitly.
 
 **Grouping.** One physical bridge is often mapped as several OSM features (a long viaduct
-split into segments, the two carriageways of a divided road). The build assigns a shared
-`group_id` to features that are within `group_distance_m` *and* carry the same thing — so a
-long bridge collapses to one record, but a footbridge is never merged with the car bridge
-beside it. For NL this collapses ≈ 125 k features into ≈ 100 k physical bridges; the map
-shows one marker per group.
+split into segments, the two carriageways of a divided road, a `man_made=bridge` outline plus
+the way over it). The build assigns a shared `group_id` by linking features under three rules:
+(1) adjacent and **same `carries_type`**; (2) **same `carries_type` crossing the same waterway**
+within a wider distance — so the two carriageways of a divided road over one canal/river merge;
+(3) near and the **same name**, regardless of type — so the road + cycle parts of a named bridge
+(e.g. the *Plantagebrug* in Delft) merge. A footbridge is never merged with the car bridge
+beside it unless they share a name. For NL this collapses ≈ 125 k features into ≈ 93 k physical
+bridges; the map shows one marker per group. All three distances are per-country config.
 
 ## Usage
 

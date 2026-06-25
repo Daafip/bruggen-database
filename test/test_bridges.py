@@ -185,6 +185,57 @@ def test_assign_groups_empty():
     assert "group_id" in out.columns and len(out) == 0
 
 
+def test_assign_groups_water_rule_merges_divided_carriageways():
+    # Two road carriageway spans ~40 m apart (beyond the 25 m base rule), both crossing the
+    # same canal -> one physical bridge via the same-waterway rule.
+    bridges = gpd.GeoDataFrame(
+        {
+            "id": ["way/1", "way/2"],
+            "carries_type": ["road", "road"],
+            "name": [None, None],
+        },
+        geometry=[
+            LineString([(4.9000, 52.0), (4.9000, 52.0006)]),
+            LineString([(4.9006, 52.0), (4.9006, 52.0006)]),  # ~40 m east
+        ],
+        crs=4326,
+    )
+    canal = gpd.GeoDataFrame(
+        {"water_id": ["way/100"]},
+        geometry=[LineString([(4.8990, 52.0003), (4.9020, 52.0003)])],
+        crs=4326,
+    )
+    merged = assign_groups(
+        bridges, waterways=canal, distance_m=25, water_distance_m=80, crs=28992
+    )
+    gid = dict(zip(merged["id"], merged["group_id"]))
+    assert gid["way/1"] == gid["way/2"]  # same canal + same type → one bridge
+
+    # Without the waterway link they stay apart (proves rule 2 is what merged them).
+    separate = assign_groups(
+        bridges, waterways=None, distance_m=25, water_distance_m=80
+    )
+    gid2 = dict(zip(separate["id"], separate["group_id"]))
+    assert gid2["way/1"] != gid2["way/2"]
+
+
+def test_assign_groups_name_rule_merges_across_types():
+    # A road bridge and a cycle bridge ~20 m apart sharing a name (e.g. "Plantagebrug")
+    # merge despite different carries_type.
+    bridges = gpd.GeoDataFrame(
+        {
+            "id": ["way/1", "way/2"],
+            "carries_type": ["road", "cycle"],
+            "name": ["Plantagebrug", "Plantagebrug"],
+        },
+        geometry=[Point(4.900, 52.0), Point(4.900, 52.00018)],  # ~20 m apart
+        crs=4326,
+    )
+    out = assign_groups(bridges, distance_m=25, name_distance_m=60, crs=28992)
+    gid = dict(zip(out["id"], out["group_id"]))
+    assert gid["way/1"] == gid["way/2"]  # same name + near → one, across carries_type
+
+
 # -------------------------------------------------------------------------- viewer
 def test_collapse_to_groups():
     from bridges.viewer import _collapse_to_groups

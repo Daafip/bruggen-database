@@ -207,12 +207,19 @@ A bridge need not have a name — most are unnamed — so naming is not a valida
 **Grouping (`src/bridges/group.py`).** One physical bridge is mapped as many OSM features —
 a long viaduct split into segments, the two carriageways of a divided road, a
 `man_made=bridge` outline plus the way over it. After the schema mapping, features are linked
-into connected components when they lie within `group_distance_m` (25 m, in `proj_crs`) **and**
-share a `carries_type`, and each component gets a shared `group_id`. The type constraint is
-what stops a footbridge being merged with the car bridge beside it (`road` only groups with
-`road`, `foot` with `foot`); a missing `carries_type` is its own bucket. For NL this collapses
-≈ 125 k features to ≈ 100 k physical bridges. Features are kept and tagged (not dissolved), so
-consumers can group or expand as needed.
+into connected components by three rules and each component gets a shared `group_id`:
+
+1. **adjacent, same `carries_type`** — within `group_distance_m` (25 m). A missing
+   `carries_type` is its own bucket, so a footbridge isn't merged with the car bridge beside it.
+2. **same `carries_type`, same waterway** — within `group_water_distance_m` (80 m) and
+   crossing the same river/canal/stream. This merges the two carriageways of a divided road over
+   one body of water (requires extracting waterway centrelines and snapping each bridge to the
+   waterway it sits on).
+3. **same name** — within `group_name_distance_m` (60 m), *regardless of* `carries_type` — the
+   only rule that crosses types, e.g. the road + cycle parts of the *Plantagebrug* in Delft.
+
+For NL this collapses ≈ 125 k features to ≈ 93 k physical bridges. Features are kept and tagged
+(not dissolved), so consumers can group or expand as needed.
 
 ---
 
