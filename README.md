@@ -84,6 +84,12 @@ their usual CDN/tile servers (so it needs internet to *render*, like any web map
 pixi run viewer && xdg-open data/processed/bridges_NL_viewer.html
 ```
 
+**Live map (GitHub Pages):** <https://hkv-products-services.github.io/bruggen-database/>.
+The [`pages.yml`](.github/workflows/pages.yml) workflow rebuilds the dataset in CI and
+publishes the viewer as the site's `index.html` — on a monthly schedule, on a manual
+*Run workflow*, and on pushes that touch the pipeline. First-time setup: in the repo,
+**Settings → Pages → Source: GitHub Actions**, then trigger the workflow once.
+
 **Extraction paths**: `--source overpass` (default) hits the Overpass API — quick and
 download-free, best with `--bbox` for a small area; `--source pbf` parses a dated Geofabrik
 `.osm.pbf` with pyosmium — offline, no rate limits, and the only practical route for a whole
