@@ -85,10 +85,12 @@ pixi run viewer && xdg-open data/processed/bridges_NL_viewer.html
 ```
 
 **Live map (GitHub Pages):** <https://hkv-products-services.github.io/bruggen-database/>.
-The [`pages.yml`](.github/workflows/pages.yml) workflow rebuilds the dataset in CI and
-publishes the viewer as the site's `index.html` — on a monthly schedule, on a manual
-*Run workflow*, and on pushes that touch the pipeline. First-time setup: in the repo,
-**Settings → Pages → Source: GitHub Actions**, then trigger the workflow once.
+The [`pages.yml`](.github/workflows/pages.yml) workflow publishes the **committed**
+`data/processed/bridges_NL_viewer.html` as the site's `index.html` (it does *not* rebuild the
+data) — on a manual *Run workflow* and whenever that file changes on `master`. To refresh the
+live map, regenerate it locally (`pixi run viewer`) and commit the updated HTML. First-time
+setup: in the repo, **Settings → Pages → Source: GitHub Actions**, then trigger the workflow
+once.
 
 **Extraction paths**: `--source overpass` (default) hits the Overpass API — quick and
 download-free, best with `--bbox` for a small area; `--source pbf` parses a dated Geofabrik
