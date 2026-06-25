@@ -74,8 +74,9 @@ land in `data/processed/`: `bridges_<C>.geojson` / `.kml` / `.csv` (+
 
 The full GeoJSON is too large for Google's preview, so `viewer` renders a **single,
 lightweight HTML map** (`bridges_<C>_viewer.html`, a few MB) you can open straight in a
-browser: one marker per physical bridge (grouped) in a client-side cluster, plus the
-movable bridges as colour-coded markers with popups. The data is embedded in the file;
+browser: one marker per physical bridge (grouped) in a client-side cluster — each clickable
+for a popup with name, type, what it carries, and **length / width** — plus the movable
+bridges as colour-coded markers with richer popups. The data is embedded in the file;
 Leaflet and the map tiles load from
 their usual CDN/tile servers (so it needs internet to *render*, like any web map).
 
