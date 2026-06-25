@@ -217,13 +217,14 @@ into connected components by three rules and each component gets a shared `group
    waterway it sits on).
 3. **same name** — within `group_name_distance_m` (60 m), *regardless of* `carries_type`, e.g.
    the road + cycle parts of the *Plantagebrug* in Delft.
-4. **catch-all proximity** — within `group_merge_distance_m` (10 m), unconditionally; anything
-   that close is the same structure.
+4. **catch-all proximity** — within `group_merge_distance_m` (10 m), for leftovers.
 
-Each group gets one representative point (`group_lat`/`group_lon`) **snapped onto the road**
-(the midpoint of its longest carriageway), so the marker sits on the deck rather than drifting
-into the water. For NL this collapses ≈ 125 k features to ≈ 75 k physical bridges. Features are
-kept and tagged (not dissolved), so consumers can group or expand as needed.
+A **different-name guard** stops rules 1/2/4 from merging two features that carry *different*
+names (so Plantagebrug / Tweemolentjesbrug / Duyvelsgatbrug, a few metres apart along one Delft
+canal, stay three bridges), while an unnamed segment still joins its named bridge. Each group
+gets one representative point (`group_lat`/`group_lon`), the mean of its members. For NL this
+collapses ≈ 125 k features to ≈ 79 k physical bridges. Features are kept and tagged (not
+dissolved), so consumers can group or expand as needed.
 
 ---
 

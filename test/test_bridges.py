@@ -254,29 +254,34 @@ def test_assign_groups_merge_rule_combines_anything_within_10m():
     assert gid["way/1"] == gid["way/2"]  # within 10 m → same bridge regardless of type
 
 
-def test_assign_groups_snaps_point_to_carriageway():
-    # A structure outline (polygon over water) + the carriageway line on the road. The group's
-    # representative point must land on the carriageway midpoint, not the polygon centroid.
+def test_assign_groups_different_names_stay_separate():
+    # Three distinct named bridges a few metres apart along a canal (the Delft
+    # Plantagebrug / Tweemolentjesbrug / Duyvelsgatbrug case). Even within the 10 m catch-all,
+    # different names must NOT merge.
     bridges = gpd.GeoDataFrame(
         {
-            "id": ["way/1", "way/2"],
-            "carries_type": [None, "road"],
-            "name": [None, None],
-            "feature_kind": ["structure", "carriageway"],
+            "id": ["way/1", "way/2", "way/3"],
+            "carries_type": [None, None, None],
+            "name": ["Plantagebrug", "Tweemolentjesbrug", "Duyvelsgatbrug"],
         },
-        geometry=[
-            Polygon(
-                [(4.9000, 52.0), (4.9004, 52.0), (4.9004, 52.0004), (4.9000, 52.0004)]
-            ),
-            LineString([(4.8998, 52.0002), (4.9006, 52.0002)]),  # crosses the polygon
-        ],
+        geometry=[Point(4.9000, 52.0), Point(4.90005, 52.0), Point(4.90010, 52.0)],
         crs=4326,
     )
     out = assign_groups(bridges, distance_m=25, merge_distance_m=10, crs=28992)
-    assert out["group_id"].nunique() == 1  # merged (overlapping, within 10 m)
-    # The carriageway midpoint is at lon ≈ 4.9002, lat ≈ 52.0002.
-    assert abs(out["group_lon"].iloc[0] - 4.9002) < 1e-3
-    assert abs(out["group_lat"].iloc[0] - 52.0002) < 1e-3
+    assert out["group_id"].nunique() == 3  # three names → three bridges
+
+    # An unnamed segment still joins its named bridge (guard only blocks two *different* names).
+    with_segment = gpd.GeoDataFrame(
+        {
+            "id": ["way/1", "way/2"],
+            "carries_type": [None, "road"],
+            "name": ["Plantagebrug", None],
+        },
+        geometry=[Point(4.9000, 52.0), Point(4.90005, 52.0)],
+        crs=4326,
+    )
+    out2 = assign_groups(with_segment, distance_m=25, merge_distance_m=10, crs=28992)
+    assert out2["group_id"].nunique() == 1
 
 
 # -------------------------------------------------------------------------- viewer

@@ -41,11 +41,12 @@ the way over it). The build assigns a shared `group_id` by linking features unde
 (1) adjacent and **same `carries_type`**; (2) **same `carries_type` crossing the same waterway**
 — so the two carriageways of a divided road over one canal/river merge; (3) near and the **same
 name**, regardless of type — so the road + cycle parts of a named bridge (e.g. the *Plantagebrug*
-in Delft) merge; (4) a 10 m **catch-all** — anything that close is the same structure. Each
-group gets one representative point (`group_lat`/`group_lon`) **snapped onto the road** (the
-carriageway midpoint), so the marker sits on the deck instead of drifting into the water. For NL
-this collapses ≈ 125 k features into ≈ 75 k physical bridges; the map shows one snapped marker
-per group. All four distances are per-country config.
+in Delft) merge; (4) a 10 m **catch-all** — leftovers. A **different-name guard** stops rules 1/2/4 from merging two features that carry
+*different* names, so distinct bridges a few metres apart (Plantagebrug / Tweemolentjesbrug /
+Duyvelsgatbrug along one Delft canal) stay separate, while an unnamed segment still joins its
+named bridge. Each group gets one representative point (`group_lat`/`group_lon`), the mean of
+its members. For NL this collapses ≈ 125 k features into ≈ 79 k physical bridges; the map shows
+one marker per group. All four distances are per-country config.
 
 ## Usage
 

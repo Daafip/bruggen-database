@@ -5,7 +5,7 @@ segments, the two carriageways of a divided road, or a ``man_made=bridge`` outli
 ``bridge=*`` way over it. Left ungrouped, the dataset double-counts and the map shows a
 cluster of pins where there is one bridge.
 
-Features are linked into connected components by three rules; any link merges them:
+Features are linked into connected components by four rules; any link merges them:
 
 1. **same kind, adjacent** — within ``distance_m`` and equal ``carries_type``
    (split segments / touching carriageways). A missing ``carries_type`` is its own bucket,
@@ -16,14 +16,17 @@ Features are linked into connected components by three rules; any link merges th
 3. **same name** — within ``name_distance_m`` and an equal (case-folded) ``name``, *regardless
    of* ``carries_type``. This collapses the road + cycle parts of a named bridge (e.g. the
    "Plantagebrug" in Delft) that rule 1 would keep apart.
-4. **catch-all proximity** — within ``merge_distance_m`` (10 m), *unconditionally*. Anything
-   this close is almost certainly the same structure (a leftover outline + its carriageway,
-   near-duplicate mappings), so they are merged regardless of type/name/water.
+4. **catch-all proximity** — within ``merge_distance_m`` (10 m). Anything this close is almost
+   certainly the same structure (a leftover outline + its carriageway, near-duplicate
+   mappings).
 
-Each group also gets a single representative point (``group_lat``/``group_lon``) **snapped onto
-the road**: the midpoint of its longest ``carriageway`` line, so the marker sits on the bridge
-deck rather than drifting into the water (a structure-only group falls back to a point on its
-outline).
+**Different-name guard:** rules 1, 2 and 4 never merge two features that *both* carry a name
+and the names differ. This keeps three distinct named bridges that happen to sit a few metres
+apart (e.g. Plantagebrug / Tweemolentjesbrug / Duyvelsgatbrug along a Delft canal) as three
+bridges, while still letting an unnamed segment or outline join its named bridge.
+
+Each group gets a single representative point (``group_lat``/``group_lon``) — the mean of its
+members' locations.
 
 ``group_id`` is deterministic (groups numbered by their smallest member OSM id), so a re-run
 on the same snapshot is byte-stable.
@@ -74,35 +77,13 @@ def _pairs(sub: gpd.GeoDataFrame, distance: float):
             yield int(li), int(ri)
 
 
-def _rep_point(geoms: list, kinds: list):
-    """A representative point for a group, snapped onto the road where possible.
+def _names_compatible(a: str | None, b: str | None) -> bool:
+    """False only when both features are named and the names differ.
 
-    Prefers the midpoint of the longest ``carriageway`` line (a point on the road deck);
-    falls back to a point on the only/largest geometry otherwise.
+    An unnamed feature is compatible with anything (so a bare outline / segment can join its
+    named bridge); two different names block the merge (distinct bridges stay separate).
     """
-    carriageway = [
-        g for g, k in zip(geoms, kinds) if k == "carriageway" and g is not None
-    ]
-    lines = [
-        g
-        for g in carriageway
-        if g.geom_type in ("LineString", "MultiLineString") and not g.is_empty
-    ]
-    if lines:
-        longest = max(lines, key=lambda ln: ln.length)
-        return longest.interpolate(0.5, normalized=True)
-    if carriageway:
-        g = carriageway[0]
-        return g if g.geom_type == "Point" else g.representative_point()
-    valid = [g for g in geoms if g is not None and not g.is_empty]
-    if not valid:
-        return geoms[0]
-    if len(valid) == 1:
-        g = valid[0]
-        return g if g.geom_type == "Point" else g.representative_point()
-    from shapely.ops import unary_union
-
-    return unary_union(valid).representative_point()
+    return not (a is not None and b is not None and a != b)
 
 
 def assign_groups(
@@ -117,9 +98,10 @@ def assign_groups(
 ) -> gpd.GeoDataFrame:
     """Return ``gdf`` with ``group_id``, ``group_size`` and ``group_lat``/``group_lon`` columns.
 
-    See the module docstring for the four linking rules and the snapped representative point.
-    ``waterways`` (``[water_id, geometry]``) enables rule 2; if it is None/empty that rule is
-    simply skipped. The input is returned unchanged in order and geometry.
+    See the module docstring for the four linking rules and the different-name guard.
+    ``group_lat``/``group_lon`` is the mean of the group's member centroids. ``waterways``
+    (``[water_id, geometry]``) enables rule 2; if it is None/empty that rule is skipped. The
+    input is returned unchanged in order and geometry.
     """
     out = gdf.copy()
     n = len(out)
@@ -144,15 +126,19 @@ def assign_groups(
 
     uf = _UnionFind(n)
 
-    # Rule 1 — adjacent, same carries_type.
+    # Rule 1 — adjacent, same carries_type (not across two different names).
     for li, ri in _pairs(g.loc[valid, ["geometry"]], distance_m):
-        if ct[li] == ct[ri]:
+        if ct[li] == ct[ri] and _names_compatible(names[li], names[ri]):
             uf.union(li, ri)
 
     # Rule 2 — same carries_type crossing the same waterway (divided-road carriageways).
     has_water = valid & pd.notna(pd.array(water_id, dtype="object"))
     for li, ri in _pairs(g.loc[has_water, ["geometry"]], water_distance_m):
-        if ct[li] == ct[ri] and water_id[li] == water_id[ri]:
+        if (
+            ct[li] == ct[ri]
+            and water_id[li] == water_id[ri]
+            and _names_compatible(names[li], names[ri])
+        ):
             uf.union(li, ri)
 
     # Rule 3 — same name, regardless of carries_type.
@@ -161,9 +147,10 @@ def assign_groups(
         if names[li] == names[ri]:
             uf.union(li, ri)
 
-    # Rule 4 — catch-all: anything within merge_distance_m is the same bridge.
+    # Rule 4 — catch-all proximity, but never across two different names.
     for li, ri in _pairs(g.loc[valid, ["geometry"]], merge_distance_m):
-        uf.union(li, ri)
+        if _names_compatible(names[li], names[ri]):
+            uf.union(li, ri)
 
     members: dict[int, list[int]] = defaultdict(list)
     for i in range(n):
@@ -173,13 +160,9 @@ def assign_groups(
         members.values(), key=lambda idxs: min(str(orig_id[k]) for k in idxs)
     )
 
-    # A single representative point per group, snapped onto the road (longest carriageway).
-    geoms = g.geometry.to_numpy()
-    fk = out["feature_kind"].to_numpy() if "feature_kind" in out.columns else [None] * n
-    rep_metric = [
-        _rep_point([geoms[k] for k in idxs], [fk[k] for k in idxs]) for idxs in ordered
-    ]
-    rep_ll = gpd.GeoSeries(rep_metric, crs=crs).to_crs(4326)
+    # One representative point per group: the mean of its members' centroids (no snapping).
+    cent = g.geometry.centroid.to_crs(4326)
+    cx, cy = cent.x.to_numpy(), cent.y.to_numpy()
 
     group_id: list[str | None] = [None] * n
     group_size = [0] * n
@@ -187,8 +170,8 @@ def assign_groups(
     group_lon: list[float | None] = [None] * n
     for gi, idxs in enumerate(ordered):
         gid = f"{country}-{gi + 1:06d}"
-        pt = rep_ll.iloc[gi]
-        lat, lon = round(float(pt.y), 6), round(float(pt.x), 6)
+        lat = round(float(cy[idxs].mean()), 6)
+        lon = round(float(cx[idxs].mean()), 6)
         for k in idxs:
             group_id[k] = gid
             group_size[k] = len(idxs)

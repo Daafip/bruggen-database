@@ -74,7 +74,7 @@ The full database is a legitimate deliverable, so the CSV/KML writers **warn** a
 file anyway (the original rest-stops exporter hard-failed). Split per province/type only when
 loading into My Maps; GeoJSON / the Datasets API have no cap.
 
-### D10 — Grouping is connected components over four rules, with a road-snapped point
+### D10 — Grouping is connected components over four rules, with a different-name guard
 One physical bridge is mapped as many OSM features (viaduct segments, divided-road
 carriageways, structure outline + carriageway). **Decision: build a graph where two features
 are linked by any of four rules, then take connected components → `group_id`** (see
@@ -90,23 +90,28 @@ are linked by any of four rules, then take connected components → `group_id`**
 3. **same name** — within `group_name_distance_m` (60 m) and an equal case-folded `name`,
    *regardless of* `carries_type`. Collapses the road + cycle parts of a named bridge, e.g.
    the **Plantagebrug** in Delft (verified: its features land in one group).
-4. **catch-all proximity** — within `group_merge_distance_m` (10 m), *unconditionally*.
-   Anything this close is almost certainly the same structure; merges leftover outlines and
-   near-duplicate mappings rules 1–3 miss.
+4. **catch-all proximity** — within `group_merge_distance_m` (10 m). Merges leftover outlines
+   and near-duplicate mappings rules 1–3 miss.
 
-**Road-snapped representative point.** Each group gets one `group_lat`/`group_lon` taken from
-the midpoint of its longest `carriageway` line, so the marker sits on the bridge deck instead
-of drifting into the water (the old group-mean did the latter). Verified: for structure +
-carriageway groups the point is 0 m from the carriageway. A structure-only group (no road
-mapped) falls back to a point on its outline.
+**Different-name guard.** Rules 1, 2 and 4 never merge two features that *both* carry a name
+and the names differ. Without it, the 10 m catch-all swallowed three distinct named bridges a
+few metres apart along a Delft canal (Plantagebrug / Tweemolentjesbrug / Duyvelsgatbrug) into
+one — the user spotted two "removed". The guard keeps differently-named bridges separate while
+still letting an *unnamed* segment or outline join its named bridge. Verified: the three Delft
+bridges are now three groups.
 
-Result for NL: 125,183 features → **75,099** physical bridges. Rules 1–3 cross `carries_type`
-only via the name rule; rule 4 is type-agnostic but tiny (10 m), so a footbridge a normal gap
-away from a car bridge is still not merged. `group_id` is numbered by the smallest member OSM
-id (deterministic). Features are kept (not dissolved) and tagged with `group_id` / `group_size`
-/ `group_lat` / `group_lon`; the map shows one snapped marker per group. All four distances are
-per-country config — genuinely distinct bridges that sit within them will merge, an accepted,
-tunable trade-off.
+**Representative point.** Each group gets one `group_lat`/`group_lon` = the **mean of its
+members' centroids**. (An earlier version snapped this onto the longest carriageway midpoint;
+that was reverted — on a mis-merged group it placed the marker confusingly far from the named
+bridge, and once merges are correct the plain mean is clear enough. Re-introducing carriageway
+snapping is a one-function change if wanted.)
+
+Result for NL: 125,183 features → **78,646** physical bridges. Rules 1–3 cross `carries_type`
+only via the name rule; rule 4 is type-agnostic but tiny (10 m) and name-guarded. `group_id` is
+numbered by the smallest member OSM id (deterministic). Features are kept (not dissolved) and
+tagged with `group_id` / `group_size` / `group_lat` / `group_lon`; the map shows one marker per
+group. All four distances are per-country config — genuinely distinct *unnamed* bridges that
+sit within them will still merge, an accepted, tunable trade-off.
 
 ---
 
