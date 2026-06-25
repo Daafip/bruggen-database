@@ -19,6 +19,8 @@ CANONICAL_FIELDS = [
     "id",
     "group_id",
     "group_size",
+    "group_lat",
+    "group_lon",
     "name",
     "country",
     "lat",
@@ -52,9 +54,12 @@ class Bridge(BaseModel):
 
     id: str
     # Shared by all OSM features that make up one physical bridge (assigned post-hoc by
-    # bridges.group; None until grouping runs). group_size is the feature count in the group.
+    # bridges.group; None until grouping runs). group_size is the feature count in the group;
+    # group_lat/group_lon is the group's single representative point, snapped onto the road.
     group_id: str | None = None
     group_size: int = 1
+    group_lat: float | None = None
+    group_lon: float | None = None
     name: str | None = None
     country: str
     lat: float

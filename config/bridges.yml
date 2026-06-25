@@ -11,6 +11,7 @@
 #   group_distance_m        same-carries_type features within this many metres are one bridge
 #   group_water_distance_m  same-type features crossing the SAME waterway within this distance
 #   group_name_distance_m   same-name features within this distance are one bridge (any type)
+#   group_merge_distance_m  catch-all: any features this close are one bridge (any type/name)
 #   regions                 optional Overpass area selectors to fetch in pieces (large countries)
 
 
@@ -22,3 +23,4 @@ NL:
   group_distance_m: 25        # split segments / adjacent carriageways collapse to one bridge
   group_water_distance_m: 80  # divided-road carriageways over the same canal/river → one
   group_name_distance_m: 60   # road + cycle parts sharing a name (e.g. Plantagebrug) → one
+  group_merge_distance_m: 10  # any features within 10 m are the same bridge (catch-all)

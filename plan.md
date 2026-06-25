@@ -215,11 +215,15 @@ into connected components by three rules and each component gets a shared `group
    crossing the same river/canal/stream. This merges the two carriageways of a divided road over
    one body of water (requires extracting waterway centrelines and snapping each bridge to the
    waterway it sits on).
-3. **same name** — within `group_name_distance_m` (60 m), *regardless of* `carries_type` — the
-   only rule that crosses types, e.g. the road + cycle parts of the *Plantagebrug* in Delft.
+3. **same name** — within `group_name_distance_m` (60 m), *regardless of* `carries_type`, e.g.
+   the road + cycle parts of the *Plantagebrug* in Delft.
+4. **catch-all proximity** — within `group_merge_distance_m` (10 m), unconditionally; anything
+   that close is the same structure.
 
-For NL this collapses ≈ 125 k features to ≈ 93 k physical bridges. Features are kept and tagged
-(not dissolved), so consumers can group or expand as needed.
+Each group gets one representative point (`group_lat`/`group_lon`) **snapped onto the road**
+(the midpoint of its longest carriageway), so the marker sits on the deck rather than drifting
+into the water. For NL this collapses ≈ 125 k features to ≈ 75 k physical bridges. Features are
+kept and tagged (not dissolved), so consumers can group or expand as needed.
 
 ---
 

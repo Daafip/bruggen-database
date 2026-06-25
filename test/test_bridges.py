@@ -151,8 +151,9 @@ def test_to_canonical_empty():
 # --------------------------------------------------------------------------- group
 def _group_gdf():
     # A,B: two road segments ~7 m apart (same type → merge).
-    # C: a footbridge ~10 m from A (cross-type → must NOT merge).
-    # D: a road segment ~68 m away (too far → own group).
+    # C: a footbridge ~17-24 m away — in the 10-25 m band, so the carries_type rule governs
+    #    (cross-type → must NOT merge; the 10 m catch-all does not reach it).
+    # D: a road segment ~62 m away (too far → own group).
     return gpd.GeoDataFrame(
         {
             "id": ["way/1", "way/2", "way/3", "way/4"],
@@ -161,7 +162,7 @@ def _group_gdf():
         geometry=[
             Point(4.90000, 52.0),
             Point(4.90010, 52.0),
-            Point(4.90015, 52.0),
+            Point(4.90035, 52.0),
             Point(4.90100, 52.0),
         ],
         crs=4326,
@@ -169,7 +170,7 @@ def _group_gdf():
 
 
 def test_assign_groups_same_type_merges_cross_type_does_not():
-    out = assign_groups(_group_gdf(), distance_m=25, crs=28992, country="NL")
+    out = assign_groups(_group_gdf(), distance_m=25, merge_distance_m=10, crs=28992)
     gid = dict(zip(out["id"], out["group_id"]))
     size = dict(zip(out["id"], out["group_size"]))
     assert gid["way/1"] == gid["way/2"]  # close, same type → one bridge
@@ -234,6 +235,48 @@ def test_assign_groups_name_rule_merges_across_types():
     out = assign_groups(bridges, distance_m=25, name_distance_m=60, crs=28992)
     gid = dict(zip(out["id"], out["group_id"]))
     assert gid["way/1"] == gid["way/2"]  # same name + near → one, across carries_type
+
+
+def test_assign_groups_merge_rule_combines_anything_within_10m():
+    # A road bridge and a foot bridge ~6 m apart, no shared name -> the 10 m catch-all merges
+    # them (rule 1 would keep them apart on carries_type).
+    bridges = gpd.GeoDataFrame(
+        {
+            "id": ["way/1", "way/2"],
+            "carries_type": ["road", "foot"],
+            "name": [None, None],
+        },
+        geometry=[Point(4.9000, 52.0), Point(4.90009, 52.0)],  # ~6 m apart
+        crs=4326,
+    )
+    out = assign_groups(bridges, distance_m=25, merge_distance_m=10, crs=28992)
+    gid = dict(zip(out["id"], out["group_id"]))
+    assert gid["way/1"] == gid["way/2"]  # within 10 m → same bridge regardless of type
+
+
+def test_assign_groups_snaps_point_to_carriageway():
+    # A structure outline (polygon over water) + the carriageway line on the road. The group's
+    # representative point must land on the carriageway midpoint, not the polygon centroid.
+    bridges = gpd.GeoDataFrame(
+        {
+            "id": ["way/1", "way/2"],
+            "carries_type": [None, "road"],
+            "name": [None, None],
+            "feature_kind": ["structure", "carriageway"],
+        },
+        geometry=[
+            Polygon(
+                [(4.9000, 52.0), (4.9004, 52.0), (4.9004, 52.0004), (4.9000, 52.0004)]
+            ),
+            LineString([(4.8998, 52.0002), (4.9006, 52.0002)]),  # crosses the polygon
+        ],
+        crs=4326,
+    )
+    out = assign_groups(bridges, distance_m=25, merge_distance_m=10, crs=28992)
+    assert out["group_id"].nunique() == 1  # merged (overlapping, within 10 m)
+    # The carriageway midpoint is at lon ≈ 4.9002, lat ≈ 52.0002.
+    assert abs(out["group_lon"].iloc[0] - 4.9002) < 1e-3
+    assert abs(out["group_lat"].iloc[0] - 52.0002) < 1e-3
 
 
 # -------------------------------------------------------------------------- viewer

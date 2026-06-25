@@ -63,10 +63,16 @@ def _collapse_to_groups(df: pd.DataFrame) -> pd.DataFrame:
     if "group_id" not in df.columns or df["group_id"].isna().all():
         return df
     grp = df.groupby("group_id", sort=False)
+    # Use the group's snapped-to-road representative point if present (constant per group),
+    # else fall back to the mean of the member points.
+    if "group_lat" in df.columns and df["group_lat"].notna().any():
+        lat, lon = grp["group_lat"].first(), grp["group_lon"].first()
+    else:
+        lat, lon = grp["lat"].mean(), grp["lon"].mean()
     out = pd.DataFrame(
         {
-            "lat": grp["lat"].mean(),
-            "lon": grp["lon"].mean(),
+            "lat": lat,
+            "lon": lon,
             "name": grp["name"].apply(_first),
             "bridge_type": grp["bridge_type"].apply(_first),
             "carries": grp["carries"].apply(_first),

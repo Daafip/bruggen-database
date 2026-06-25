@@ -8,7 +8,7 @@ reality diverged from the plan — plus what to watch next.
 | metric | value |
 |---|---|
 | OSM features | **125,183** (101,444 carriageway · 23,739 structure) |
-| physical bridges (grouped) | **93,404** (shared `group_id`; see D10) |
+| physical bridges (grouped) | **75,099** (shared `group_id`; see D10) |
 | movable | **2,566** — 1,235 bascule · 271 swing · 220 drawbridge · 145 lift · … |
 | aqueducts | 64 |
 | with span length | 99,906 (computed in EPSG:28992 / RD New) |
@@ -74,32 +74,39 @@ The full database is a legitimate deliverable, so the CSV/KML writers **warn** a
 file anyway (the original rest-stops exporter hard-failed). Split per province/type only when
 loading into My Maps; GeoJSON / the Datasets API have no cap.
 
-### D10 — Grouping is connected components over three constrained rules
+### D10 — Grouping is connected components over four rules, with a road-snapped point
 One physical bridge is mapped as many OSM features (viaduct segments, divided-road
-carriageways, structure outline + carriageway). Plain spatial clustering would merge a
-footbridge with the car bridge running beside it. **Decision: build a graph where two
-features are linked by any of three rules, then take connected components → `group_id`**
-(see [`src/bridges/group.py`](src/bridges/group.py)):
+carriageways, structure outline + carriageway). **Decision: build a graph where two features
+are linked by any of four rules, then take connected components → `group_id`** (see
+[`src/bridges/group.py`](src/bridges/group.py)):
 
 1. **adjacent same kind** — within `group_distance_m` (25 m) *and* equal `carries_type`
    (split segments / touching carriageways). Missing `carries_type` is its own bucket.
 2. **same crossing** — within `group_water_distance_m` (80 m), equal `carries_type`, and
-   crossing the **same waterway**. This is the divided-road case the user asked for: the two
-   carriageways over one canal/river merge even when tens of metres apart. Requires extracting
-   river/canal/stream centrelines (`bridges.extract`) and snapping each bridge to the waterway
-   it sits on (`sjoin_nearest`, ≤ 8 m).
+   crossing the **same waterway**. The divided-road case: the two carriageways over one
+   canal/river merge even when tens of metres apart. Requires extracting river/canal/stream
+   centrelines (`bridges.extract`) and snapping each bridge to the waterway it sits on
+   (`sjoin_nearest`, ≤ 8 m).
 3. **same name** — within `group_name_distance_m` (60 m) and an equal case-folded `name`,
-   *regardless of* `carries_type` — the only rule that crosses types. Collapses the road +
-   cycle parts of a named bridge, e.g. the **Plantagebrug** in Delft (verified: its features
-   land in one group).
+   *regardless of* `carries_type`. Collapses the road + cycle parts of a named bridge, e.g.
+   the **Plantagebrug** in Delft (verified: its features land in one group).
+4. **catch-all proximity** — within `group_merge_distance_m` (10 m), *unconditionally*.
+   Anything this close is almost certainly the same structure; merges leftover outlines and
+   near-duplicate mappings rules 1–3 miss.
 
-Result for NL: 125,183 features → **93,404** physical bridges. Cross-type merges happen
-**only** through the name rule, so a footbridge beside a car bridge with no shared name is
-never merged. `group_id` is numbered by the smallest member OSM id (deterministic across
-re-runs). Features are kept (not dissolved) and tagged with `group_id`/`group_size`; the map
-collapses to one marker per group. All three distances are per-country config; two genuinely
-distinct same-type bridges that sit within these distances (and, for rule 2, cross the same
-water) will merge — an accepted, tunable trade-off.
+**Road-snapped representative point.** Each group gets one `group_lat`/`group_lon` taken from
+the midpoint of its longest `carriageway` line, so the marker sits on the bridge deck instead
+of drifting into the water (the old group-mean did the latter). Verified: for structure +
+carriageway groups the point is 0 m from the carriageway. A structure-only group (no road
+mapped) falls back to a point on its outline.
+
+Result for NL: 125,183 features → **75,099** physical bridges. Rules 1–3 cross `carries_type`
+only via the name rule; rule 4 is type-agnostic but tiny (10 m), so a footbridge a normal gap
+away from a car bridge is still not merged. `group_id` is numbered by the smallest member OSM
+id (deterministic). Features are kept (not dissolved) and tagged with `group_id` / `group_size`
+/ `group_lat` / `group_lon`; the map shows one snapped marker per group. All four distances are
+per-country config — genuinely distinct bridges that sit within them will merge, an accepted,
+tunable trade-off.
 
 ---
 

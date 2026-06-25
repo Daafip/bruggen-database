@@ -39,6 +39,9 @@ class BridgeConfig(BaseModel):
     # Distance at which features sharing the same name are grouped, regardless of
     # carries_type (e.g. the road + cycle parts of a named bridge like "Plantagebrug").
     group_name_distance_m: float = 60.0
+    # Final catch-all: any two features this close (metres) are treated as one bridge,
+    # regardless of type/name/water — they are almost certainly the same structure.
+    group_merge_distance_m: float = 10.0
     # Optional Overpass area selectors to fetch the country in pieces (one query each,
     # merged into a single snapshot) — for countries too large for a single query.
     regions: list[str] = Field(default_factory=list)

@@ -16,6 +16,14 @@ Features are linked into connected components by three rules; any link merges th
 3. **same name** — within ``name_distance_m`` and an equal (case-folded) ``name``, *regardless
    of* ``carries_type``. This collapses the road + cycle parts of a named bridge (e.g. the
    "Plantagebrug" in Delft) that rule 1 would keep apart.
+4. **catch-all proximity** — within ``merge_distance_m`` (10 m), *unconditionally*. Anything
+   this close is almost certainly the same structure (a leftover outline + its carriageway,
+   near-duplicate mappings), so they are merged regardless of type/name/water.
+
+Each group also gets a single representative point (``group_lat``/``group_lon``) **snapped onto
+the road**: the midpoint of its longest ``carriageway`` line, so the marker sits on the bridge
+deck rather than drifting into the water (a structure-only group falls back to a point on its
+outline).
 
 ``group_id`` is deterministic (groups numbered by their smallest member OSM id), so a re-run
 on the same snapshot is byte-stable.
@@ -66,26 +74,60 @@ def _pairs(sub: gpd.GeoDataFrame, distance: float):
             yield int(li), int(ri)
 
 
+def _rep_point(geoms: list, kinds: list):
+    """A representative point for a group, snapped onto the road where possible.
+
+    Prefers the midpoint of the longest ``carriageway`` line (a point on the road deck);
+    falls back to a point on the only/largest geometry otherwise.
+    """
+    carriageway = [
+        g for g, k in zip(geoms, kinds) if k == "carriageway" and g is not None
+    ]
+    lines = [
+        g
+        for g in carriageway
+        if g.geom_type in ("LineString", "MultiLineString") and not g.is_empty
+    ]
+    if lines:
+        longest = max(lines, key=lambda ln: ln.length)
+        return longest.interpolate(0.5, normalized=True)
+    if carriageway:
+        g = carriageway[0]
+        return g if g.geom_type == "Point" else g.representative_point()
+    valid = [g for g in geoms if g is not None and not g.is_empty]
+    if not valid:
+        return geoms[0]
+    if len(valid) == 1:
+        g = valid[0]
+        return g if g.geom_type == "Point" else g.representative_point()
+    from shapely.ops import unary_union
+
+    return unary_union(valid).representative_point()
+
+
 def assign_groups(
     gdf: gpd.GeoDataFrame,
     waterways: gpd.GeoDataFrame | None = None,
     distance_m: float = 25.0,
     water_distance_m: float = 80.0,
     name_distance_m: float = 60.0,
+    merge_distance_m: float = 10.0,
     crs: int = 28992,
     country: str = "NL",
 ) -> gpd.GeoDataFrame:
-    """Return ``gdf`` with ``group_id`` and ``group_size`` columns.
+    """Return ``gdf`` with ``group_id``, ``group_size`` and ``group_lat``/``group_lon`` columns.
 
-    See the module docstring for the three linking rules. ``waterways`` (``[water_id,
-    geometry]``) enables rule 2; if it is None/empty that rule is simply skipped. The input
-    is returned unchanged in order and geometry.
+    See the module docstring for the four linking rules and the snapped representative point.
+    ``waterways`` (``[water_id, geometry]``) enables rule 2; if it is None/empty that rule is
+    simply skipped. The input is returned unchanged in order and geometry.
     """
     out = gdf.copy()
     n = len(out)
     if n == 0:
         out["group_id"] = []
         out["group_size"] = []
+        out["group_lat"] = []
+        out["group_lon"] = []
         return out
 
     g = out.to_crs(crs).reset_index(drop=True)
@@ -119,6 +161,10 @@ def assign_groups(
         if names[li] == names[ri]:
             uf.union(li, ri)
 
+    # Rule 4 — catch-all: anything within merge_distance_m is the same bridge.
+    for li, ri in _pairs(g.loc[valid, ["geometry"]], merge_distance_m):
+        uf.union(li, ri)
+
     members: dict[int, list[int]] = defaultdict(list)
     for i in range(n):
         members[uf.find(i)].append(i)
@@ -126,16 +172,33 @@ def assign_groups(
     ordered = sorted(
         members.values(), key=lambda idxs: min(str(orig_id[k]) for k in idxs)
     )
+
+    # A single representative point per group, snapped onto the road (longest carriageway).
+    geoms = g.geometry.to_numpy()
+    fk = out["feature_kind"].to_numpy() if "feature_kind" in out.columns else [None] * n
+    rep_metric = [
+        _rep_point([geoms[k] for k in idxs], [fk[k] for k in idxs]) for idxs in ordered
+    ]
+    rep_ll = gpd.GeoSeries(rep_metric, crs=crs).to_crs(4326)
+
     group_id: list[str | None] = [None] * n
     group_size = [0] * n
-    for gi, idxs in enumerate(ordered, start=1):
-        gid = f"{country}-{gi:06d}"
+    group_lat: list[float | None] = [None] * n
+    group_lon: list[float | None] = [None] * n
+    for gi, idxs in enumerate(ordered):
+        gid = f"{country}-{gi + 1:06d}"
+        pt = rep_ll.iloc[gi]
+        lat, lon = round(float(pt.y), 6), round(float(pt.x), 6)
         for k in idxs:
             group_id[k] = gid
             group_size[k] = len(idxs)
+            group_lat[k] = lat
+            group_lon[k] = lon
 
     out["group_id"] = group_id
     out["group_size"] = group_size
+    out["group_lat"] = group_lat
+    out["group_lon"] = group_lon
     return out
 
 

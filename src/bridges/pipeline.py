@@ -136,6 +136,7 @@ def cmd_build(args) -> int:
         distance_m=cfg.group_distance_m,
         water_distance_m=cfg.group_water_distance_m,
         name_distance_m=cfg.group_name_distance_m,
+        merge_distance_m=cfg.group_merge_distance_m,
         crs=cfg.proj_crs,
         country=cfg.iso,
     )
